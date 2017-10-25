@@ -9,47 +9,45 @@ module.exports = function(Rewardsprogram) {
     var CreditCards = app.models.CreditCard;
 
     
-    function queryMemberId(Members) {
+     function queryMemberId(Members) {
       return Promise.all(Members.map(Customers.getMemberId));
-    }
+     }
 
-    function queryCreditCards(MemberIds) {
+     function queryCreditCards(MemberIds) {
        return Promise.all(MemberIds.map(CreditCards.getCards)); 
-    }
+     } 
 
-    function getPoints(Card) {
-        return Card.Points;
-    }
-    
-    function getId(Member) {
-        return Member.id
-    }
+     function flattenRecords(queryResults, dataAccessor) {
+        var records = queryResults.map(function(query) {
+            return query.map(dataAccessor)
+            });
+        
+        var flattenData = records.reduce(function(record1,record2) {
+            return record1.concat(record2);
+            })
 
-   queryMemberId(Members)
-   .then(function(queryResults) {
-        var ids = queryResults.map(function(query) {
-            return query.map(getId)
-         });
-        var flattenedIds = ids.reduce(function(id1,id2) {
-            return id1.concat(id2); 
-        })
-        queryCreditCards(flattenedIds)
-        .then(function(queryResults) {
-           var points = queryResults.map(function(query) {
-              return query.map(getPoints)
-           });
-           var flattenedPoints = points.reduce(function(points1,points2) {
-              return points1.concat(points2);
-           });
-           var totalPoints = flattenedPoints.reduce(function(points1,points2) {
-              return points1 + points2;
-           });
-           cb(null,totalPoints);
-        })
-   })
-   
-   
-   };
+        return flattenData;
+     }
+
+
+    /*Query Customers Credit Card Information, collect all the points 
+      aggregate and return the sum
+    */
+     queryMemberId(Members)
+     .then(function(queryResults){
+           var memberIds = flattenRecords(queryResults,Customers.getId)
+           queryCreditCards(memberIds)
+           .then(function(queryResults) {
+                   var points = flattenRecords(queryResults,CreditCards.getPoints);
+                   var totalPoints = points.reduce(function(points1,points2) {
+                       return points1 + points2;
+                       });
+                   cb(null,totalPoints);
+           })
+     })
+  
+  };
+
 
    Rewardsprogram.remoteMethod("getPoints",{
      accepts: [
