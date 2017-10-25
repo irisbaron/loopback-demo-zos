@@ -2,8 +2,8 @@
 
 module.exports = function(Customer) {
   var app = require("../../server/server");
-  Customer.getPoints = function(Member) {
-     var CreditCards = app.models.CreditCard;
-     
+  Customer.getMemberId = function(MemberName) {
+     var Customers = app.models.Customer;
+     return Customers.find({where:{Name:MemberName}})
   }
 };

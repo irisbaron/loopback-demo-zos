@@ -8,47 +8,47 @@ module.exports = function(Rewardsprogram) {
     var Customers = app.models.Customer;
     var CreditCards = app.models.CreditCard;
 
-    //Collect the points for all customers enrolled in the program
-    function Accumulator() {
-        var Total = 0;
-        var callback = cb;
-        return { 
-          add:function(Points) {
-            Total += Points;
-            console.log("New Total:" + Total);
-          },
-          getTotal:function() {
-            return Total;
-          }  
-        }
-     }
-   
-    //Find the customers listed
-    var TotalPoints = Accumulator();
-    var memberIdx;
-    var promise_list = [];
-    for (memberIdx = 0; memberIdx < Members.length; memberIdx++) {
-          promise_list.push(Customers.find({where:{Name:Members[memberIdx]}}))
-    }       
     
-    //Accumulate all the poitns
-    Promise.all(promise_list)
-     .then(function() {
-              while (promise_list.length) {
-                 var promise = promise_list.pop();
-                 promise
-                 .then(function(customer) {
-                       CreditCards.getPoints(customer[0].id,TotalPoints);
-                 })
-                 .catch(function(error) {
-                        console.log("Error occured" + error);
-                 })
-              }
-           cb(null, TotalPoints.getTotal());
-           })
-     .catch(function(err) {
-               console.log("Error occured" + err);
-            })
+    function queryMemberId(Members) {
+      return Promise.all(Members.map(Customers.getMemberId));
+    }
+
+    function queryCreditCards(MemberIds) {
+       return Promise.all(MemberIds.map(CreditCards.getCards)); 
+    }
+
+    function getPoints(Card) {
+        return Card.Points;
+    }
+    
+    function getId(Member) {
+        return Member.id
+    }
+
+   queryMemberId(Members)
+   .then(function(queryResults) {
+        var ids = queryResults.map(function(query) {
+            return query.map(getId)
+         });
+        var flattenedIds = ids.reduce(function(id1,id2) {
+            return id1.concat(id2); 
+        })
+        queryCreditCards(flattenedIds)
+        .then(function(queryResults) {
+           var points = queryResults.map(function(query) {
+              return query.map(getPoints)
+           });
+           var flattenedPoints = points.reduce(function(points1,points2) {
+              return points1.concat(points2);
+           });
+           var totalPoints = flattenedPoints.reduce(function(points1,points2) {
+              return points1 + points2;
+           });
+           cb(null,totalPoints);
+        })
+   })
+   
+   
    };
 
    Rewardsprogram.remoteMethod("getPoints",{
