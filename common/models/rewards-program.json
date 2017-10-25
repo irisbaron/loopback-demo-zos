@@ -1,0 +1,26 @@
+{
+  "name": "RewardsProgram",
+  "plural": "n",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "Type": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customers": {
+      "type": "hasMany",
+      "model": "Customer",
+      "foreignKey": "programId",
+      "through": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

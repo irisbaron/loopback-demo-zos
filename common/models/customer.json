@@ -1,0 +1,29 @@
+{
+  "name": "Customer",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "Name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "creditCards": {
+      "type": "hasMany",
+      "model": "CreditCard",
+      "foreignKey": "customerId"
+    },
+   "rewardsProgram": {
+      "type": "belongsTo",
+      "model": "RewardsProgram",
+      "foreignKey": "programId"
+    } 
+  },
+  "acls": [],
+  "methods": {}
+}

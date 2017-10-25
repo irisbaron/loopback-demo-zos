@@ -1,0 +1,14 @@
+{
+  "customerRecords": {
+    "name": "customerRecords",
+    "connector": "memory"
+  },
+  "creditCardRecords": {
+    "name": "creditCardRecords",
+    "connector": "memory"
+  },
+  "RewardsProgram": {
+    "name": "RewardsProgram",
+    "connector": "memory"
+  }
+}
