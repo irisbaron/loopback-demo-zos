@@ -19,8 +19,14 @@ $ node .
 ```
 In another shell:
 ```
-$ curl http://localhost:3000/api/n/getPoints?Members=Monica&&Members=Chandler
+$ curl -X GET -d 'Members[]=Monica&&Members[]=Chandler' 'http://localhost:3000/api/n/getPoints' 
 
 ```
-You should see the amount of credit card rewards points that are available
-for Monica and Chandler to redeem together.
+Or use your browser and pass the following url:
+```
+http://localhost:3000/api/n/getPoints?Members=Monica&&Members=Chandler
+
+```
+
+You should see the amount of credit card rewards points that Monica and Chandler can 
+redeem together.
