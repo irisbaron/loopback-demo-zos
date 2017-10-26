@@ -21,7 +21,7 @@
     "dataSource": "creditCardRecords",
     "public": false
   },
-  "RewardsProgram": {
+  "Reward": {
     "dataSource": "RewardsProgram",
     "public": true
   }

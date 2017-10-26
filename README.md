@@ -19,12 +19,12 @@ $ node .
 ```
 In another shell:
 ```
-$ curl -X GET -d 'Members[]=Monica&&Members[]=Chandler' 'http://localhost:3000/api/n/getPoints' 
+$ curl -X GET -d 'Members[]=Monica&&Members[]=Chandler' 'http://localhost:3000/api/Rewards/getPoints' 
 
 ```
 Or use your browser and pass the following url:
 ```
-http://localhost:3000/api/n/getPoints?Members=Monica&&Members=Chandler
+http://localhost:3000/api/Rewards/getPoints?Members=Monica&&Members=Chandler
 
 ```
 

@@ -1,16 +1,9 @@
 {
-  "name": "RewardsProgram",
-  "plural": "n",
+  "name": "Reward",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
-  },
-  "properties": {
-    "Type": {
-      "type": "string",
-      "required": true
-    }
   },
   "validations": [],
   "relations": {

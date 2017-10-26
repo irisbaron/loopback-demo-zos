@@ -3,7 +3,7 @@
 module.exports = function(app) {
    var Customer = app.models.Customer;
    var CreditCard = app.models.CreditCard;
-   var RewardsProgram = app.models.RewardsProgram;
+   var RewardsProgram = app.models.Reward;
 
    var customers = [
       {Name : "Chandler"},
