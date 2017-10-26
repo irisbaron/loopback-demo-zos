@@ -7,7 +7,6 @@ module.exports = function(Rewardsprogram) {
    Rewardsprogram.getPoints = function (Members,ProgramType,cb){
      var Customers = app.models.Customer;
      var CreditCards = app.models.CreditCard;
-     console.log(Members); 
      function queryMemberId(Members) {
           return Promise.all(Members.map(Customers.getMemberId));
      }
