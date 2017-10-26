@@ -3,7 +3,7 @@
 module.exports = function(app) {
    var Customer = app.models.Customer;
    var CreditCard = app.models.CreditCard;
-   var RewardsProgram = app.models.Reward;
+   var Rewards = app.models.Reward;
 
    var customers = [
       {Name : "Chandler"},
@@ -21,16 +21,11 @@ module.exports = function(app) {
    ];
 
 
-   var rewardsPrograms = [
-     {Type: "Family"},
-     {Type: "Friend"}
-   ]
 
   
    //Create Friend Rewards Program Info
-   RewardsProgram.create(rewardsPrograms[1], function(err, instance) {
+   Rewards.create( function(err, instance) {
      if (err) return console.log(err);
-     console.log("rewardsProgram created: ", instance);
      customers[2].programId = instance.id;
      customers[3].programId = instance.id;
      Customer.create(customers[2], function(err, instance) {
@@ -51,12 +46,12 @@ module.exports = function(app) {
          console.log("CreditCard Created: ", instance);
        });
      });
+   console.log("rewardsProgram created: ", instance);
    });
    
    //Create Family Rewards Program info
-   RewardsProgram.create(rewardsPrograms[0], function(err, instance) {
+   Rewards.create( function(err, instance) {
      if (err) return console.log(err);
-     console.log("rewardsProgram created: ", instance);
      customers[0].programId = instance.id;
      customers[1].programId = instance.id;
      Customer.create(customers[0], function(err, instance) {
@@ -78,6 +73,7 @@ module.exports = function(app) {
           console.log("CreditCard Created: ", instance);
         });
      });
+     console.log("rewardsProgram created: ", instance);
    });
 
 
