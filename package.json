@@ -1,5 +1,5 @@
 {
-  "name": "VisaRewards",
+  "name": "Rewards",
   "version": "1.0.0",
   "main": "server/server.js",
   "engines": {
@@ -31,5 +31,5 @@
     "url": ""
   },
   "license": "UNLICENSED",
-  "description": "VisaRewards"
+  "description": "Rewards"
 }
