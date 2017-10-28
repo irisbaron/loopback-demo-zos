@@ -5,6 +5,12 @@
   "options": {
     "validateUpsert": true
   },
+  "properties":{
+     "AccountName": {
+        "type": "string",
+        "required": true
+      }
+  },    
   "validations": [],
   "relations": {
     "customers": {

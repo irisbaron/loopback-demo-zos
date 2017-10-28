@@ -14,7 +14,6 @@ module.exports = function(Creditcard) {
           weight = 0.75
       else if(Card.AccountType == "Silver")
           weight = 0.5
-      
       return weight*Card.Points;
     }
 };

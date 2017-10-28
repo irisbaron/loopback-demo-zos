@@ -15,7 +15,7 @@
   },
   "Customer": {
     "dataSource": "customerRecords",
-    "public": true 
+    "public": false 
   },
   "CreditCard": {
     "dataSource": "creditCardRecords",

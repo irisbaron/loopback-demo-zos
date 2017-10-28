@@ -3,7 +3,7 @@
 module.exports = function(Customer) {
    var app = require("../../server/server");
    
-   Customer.getMemberId = function(MemberName) {
+   Customer.getMember = function(MemberName) {
      var Customers = app.models.Customer;
      return Customers.find({where:{Name:MemberName}})
    }
