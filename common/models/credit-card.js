@@ -9,11 +9,6 @@ module.exports = function(Creditcard) {
     }
     
     Creditcard.getPoints = function(Card) {
-      var weight = 1;
-      if(Card.AccountType == "Gold")
-          weight = 0.75
-      else if(Card.AccountType == "Silver")
-          weight = 0.5
-      return weight*Card.Points;
+      return Card.Points;
     }
 };

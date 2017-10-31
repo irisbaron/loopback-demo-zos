@@ -19,7 +19,7 @@
       "foreignKey": "customerId"
     },
    "rewardsProgram": {
-      "type": "hasMany",
+      "type": "belongsTo",
       "model": "Reward",
       "foreignKey": "programId"
     } 

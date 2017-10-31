@@ -34,8 +34,8 @@ module.exports = function(Rewards) {
            var memberSet = rewardPgmIds.filter(id => {
                return id == referenceId;
                });
-           if (memberSet.length == 0 || referenceId == null 
-              || referenceId == undefined){
+           if (referenceId == null || referenceId == undefined
+               || memberSet.length == 0){
                cb(null,0);
                }
            var memberIds   = Rewards.flattenRecords(queryResults,Customers.getId);
@@ -48,11 +48,11 @@ module.exports = function(Rewards) {
                    cb(null,totalPoints);
            })
            .catch(function(error) {
-                  console.log("Error occured in CreditCard query " + error);    
+                     console.log("Error occured in CreditCard query " + error);    
            })
      })
      .catch(function(error) {
-            console.log("Error occured in Customer query" + error);
+               console.log("Error occured in Customer query" + error);
      })
    };
 
@@ -82,7 +82,7 @@ module.exports = function(Rewards) {
                 queryResults.forEach(function(result) {
                     result.forEach(function(customer) {
                        customer.updateAttribute("programId", instance.id, function (err, customer){
-                       console.log("Customer updated" + JSON.stringify(customer));
+                       console.log("Customer Record updated:" + JSON.stringify(customer));
                        })
                     })
                 })
@@ -93,12 +93,73 @@ module.exports = function(Rewards) {
               cb(null, response);
            }
        })
+       .catch(function(error) {
+                 console.log("Error occured in Customer query" + error);   
+       })
    };
 
    /*Update user points total by making the appropriate updates
      to their credit card info*/
-   Rewards.claimPoints = function(Members, claimedPoints, cb) {
-              
+   Rewards.claimPoints = function(claimedPoints, cb) {
+     var app = require("../../server/server.js");
+     var Customers = app.models.Customer;
+     var CreditCards = app.models.CreditCard;
+     var Rewards = app.models.Reward;
+     var Members = claimedPoints.map(function(claim) {
+                   return claim.Name;
+     });
+     var pointsToDeduct =  claimedPoints.map(function(claim) {
+                           return claim.Points; 
+     });
+     Rewards.sendQuery(Members, Customers.getMember)
+       .then(function(queryResults) {
+           var rewardPgmIds = Rewards.flattenRecords(queryResults,Customers.getPgmId);
+           var referenceId = rewardPgmIds.pop();
+           var memberSet = rewardPgmIds.filter(id => {
+               return id == referenceId;
+               });
+           if (referenceId == null || referenceId == undefined
+               || memberSet.length == 0){
+               cb(null,0);
+               }
+           var memberIds   = Rewards.flattenRecords(queryResults,Customers.getId);
+           Rewards.sendQuery(memberIds,CreditCards.getCards)
+           .then(function(queryResults) {
+                   var points = Rewards.flattenRecords(queryResults,CreditCards.getPoints);
+                   var cardIndex = 0;
+                   //Check if both customers have sufficient points
+                   for (cardIndex = 0 ; cardIndex < points.length; cardIndex++) {
+                         if (points[cardIndex] < pointsToDeduct[cardIndex]) {
+                               cb(null,{Status:"Failed",Reason:"Insufficient points"});
+                               return;
+                               }
+                        }
+                   
+                   //Update customer credit card points total
+                   cardIndex = 0;      
+                   var remainingPoints = 0;
+                   queryResults.forEach(function(query) {
+                      query.forEach(function(card) {
+                         console.log("Current points tally:" + points[cardIndex]);
+                         console.log("Points to deduct:" + pointsToDeduct[cardIndex]);
+                         var newPoints = points[cardIndex] - pointsToDeduct[cardIndex];
+                         console.log("NewPoints:" + newPoints + "for card#:" + cardIndex);
+                         card.updateAttribute("Points", newPoints, function(err, card) {
+                                console.log("Updated card Info:" + JSON.stringify(card));                          
+                                });
+                         cardIndex++;     
+                         remainingPoints +=  newPoints;     
+                      })
+                   })
+                   cb(null, {Status:"Success", RemainingPoints:remainingPoints});      
+           })
+           .catch(function(error) {
+                    console.log("Error occured in CreditCard query" + error);     
+           })
+       })    
+       .catch(function(error){
+                console.log("Error occured in Customer query" + error);       
+       })
    };
 
    /*Delete an account if members choose to close the account*/
@@ -124,10 +185,12 @@ module.exports = function(Rewards) {
   
    Rewards.remoteMethod("claimPoints", {
      accepts: [ 
-              {arg: "Members", type: "array"},
-              {arg: "claimedPoints", type:"number"}
+              {arg: "claimedPoints", type: "array"},
               ],
-     returns: {arg: "RemainingPoints", type: "number"},
+     returns: [
+              {arg :"Status", type: "string"},
+              {arg: "RemainingPoints", type: "number"}
+              ],
      http: {verb:"put"}
      });
 
