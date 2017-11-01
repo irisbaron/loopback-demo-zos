@@ -19,8 +19,10 @@ $ node .
 ```
 In another shell:
 ```
-$ curl -X GET -d 'Members[]=Monica&&Members[]=Chandler' 'http://localhost:3000/api/Rewards/getPoints' 
-
+$ curl -X POST -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/createAccount" (CREATE)
+$ curl -X GET -d 'Members[]=Monica&&Members[]=Chandler' 'http://localhost:3000/api/Rewards/getPoints'  (READ)
+$ curl -X PUT -H "Content-type:application/json" -d '{"claimedPoints":[{"Name":"Monica","Points":"1000"},{"Name":"Chandler","Points":"100"}]}' "http://localhost:3000/api/Rewards/claimPoints" (UPDATE)
+$ curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/closeAccount" (DELETE)
 ```
 Or use your browser and pass the following url:
 ```
