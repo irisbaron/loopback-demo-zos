@@ -7,7 +7,7 @@
     "name": "creditCardRecords",
     "connector": "memory"
   },
-  "RewardsProgram": {
+  "rewardsProgramRecords": {
     "name": "RewardsProgram",
     "connector": "memory"
   }

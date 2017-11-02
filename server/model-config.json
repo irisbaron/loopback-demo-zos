@@ -22,7 +22,7 @@
     "public": false
   },
   "Reward": {
-    "dataSource": "RewardsProgram",
+    "dataSource": "rewardsProgramRecords",
     "public": true
   }
 }
