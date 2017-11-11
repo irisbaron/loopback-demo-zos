@@ -1,15 +1,15 @@
 
-de.js on z/OS – Create Rewards Program APIs and deploy it on z/OS
+# Node.js on z/OS – Create Rewards Program APIs and deploy it on z/OS
 
 # Overview
 
 In this tutorial, we will build a Node.js backend application on z/OS. The application accesses information that resides on z/OS and provides an API that can later be consumed by frontend applications and services. This tutorial will highlight the benefits of hosting the Node.js application on z/OS and will provide an introduction to Node.js development for traditional z/OS developers.
 
-Node.js is a very popular platform for developing scalable enterprise API tier. Built upon the JavaScript programming language, Node.js enables millions of developers to build and collaborate across frontend and backend aspects of an application. Furthermore, the Node.js community have and continue to develop a plethora of frameworks and modules to enable rich web applications.  In this tutorial, we will focus on one such open-source framework - LoopBack.  LoopBack is a highly-extensible, open-source framework, that allows you to create end-to-end REST APIs with minimum coding effort. It allows for agile development and quick iterations for expending and growing the enterprise solution. As Node.js is platform neutral, the development can be done on any platform independent on the deployment. Node.js on z/OS is now a first-class enterprise offering, making it ideal for hosting backend applications which require access to z/OS assets while providing performance, scalability and security. In this tutorial we showcase the business challenges that a typical customer on IBM Z might experience. We share a case study about a fictitious _Dinosaur_ credit card company, and how they leverage the capabilities of the z/OS system.
+Node.js is a very popular platform for developing scalable enterprise API tier. Built upon the JavaScript programming language, Node.js enables millions of developers to build and collaborate across frontend and backend aspects of an application. Furthermore, the Node.js community have and continue to develop a plethora of frameworks and modules to enable rich web applications.  In this tutorial, we will focus on one such open-source framework - LoopBack.  LoopBack is a highly-extensible, open-source framework, that allows you to create end-to-end REST APIs with minimum coding effort. It allows for agile development and quick iterations for expending and growing the enterprise solution. As Node.js is platform neutral, the development can be done on any platform independent on the deployment. Node.js on z/OS is now a first-class enterprise offering, making it ideal for hosting backend applications which require access to z/OS assets while providing performance, scalability and security. In this tutorial we showcase the business challenges that a typical customer on IBM Z might experience. We share a case study about a fictitious _TorCC_ credit card company, and how they leverage the capabilities of the z/OS system.
 
-The _Dinosaur_ credit card company provides a complex reward system as incentive program for its customers. It allows members to share their reward points. The company wishes to create a backend application that provides an API to query the status of the reward program, based on the member name or set of names. The resulting API can then be used by web or mobile applications (the frontend) for members to query the status of their reward points, whether individually or shared. It can also be used by other frontend applications, for example, to create internal reports or use analytics to provide recommendations to the members.
+The TorCC credit card company provides a complex reward system as incentive program for its customers. It allows members to share their reward points. The company wishes to create a backend application that provides an API to query the status of the reward program, based on the member name or set of names. The resulting API can then be used by web or mobile applications (the frontend) for members to query the status of their reward points, whether individually or shared. It can also be used by other frontend applications, for example, to create internal reports or use analytics to provide recommendations to the members.
 
-The objective of this application is to enable a highly scalable set of APIs that can support large volumes of concurrent transactions, while ensuring that confidential information, such as user and credit card data are never exposed to an external network or cloud.  Given the massive volume of data and transactions Dinosaur Credit Card handle, they host the data on z/OS. To provide best security and performance, the company decides to host their back-end application on the same system, the z/OS system, where the data resides.  Co-location of the application with the data allows Dinosaur Credit Card to take advantage of the high of levels of performance, reliability, security and scalability that z/OS provides, while also benefiting from improved response time and throughput performance accessing the data.  With sensitive or confidential data hosted on z/OS, co-locating the application on the same platform reduces the risk of data breaches, and avoids the monetary costs of ETL&#39;ing the data.  If the APIs are well designed, there will be no confidential communication exposed on the external network between the frontend and the backend.
+The objective of this application is to enable a highly scalable set of APIs that can support large volumes of concurrent transactions, while ensuring that confidential information, such as user and credit card data are never exposed to an external network or cloud.  Given the massive volume of data and transactions TorCC Credit Card handle, they host the data on z/OS. To provide best security and performance, the company decides to host their back-end application on the same system, the z/OS system, where the data resides.  Co-location of the application with the data allows TorCC Credit Card to take advantage of the high of levels of performance, reliability, security and scalability that z/OS provides, while also benefiting from improved response time and throughput performance accessing the data.  With sensitive or confidential data hosted on z/OS, co-locating the application on the same platform reduces the risk of data breaches, and avoids the monetary costs of ETL&#39;ing the data.  If the APIs are well designed, there will be no confidential communication exposed on the external network between the frontend and the backend.
 
 In addition, having the backend application on the same system as the data will also reduce cost of power, footprint, and cooling and decrease system complexity and management efforts, compared to a solution on a remote or distributed system.
 
@@ -41,7 +41,7 @@ Application Walkthrough
 
 This section provides introduction experience into Node.js, to showcase the ease of writing Node.js applications and to familiarize with LoopBack concepts and components. It provides a couple of paths of engagement designed for different levels of experience.
 
-In our scenario, the Dinosaur credit card company holds data regarding the members, the credit cards and the reward programs. It provides rewards program in which multiple members share the reward program. Dinosaur CC wants to expose APIs for frontend or mobile usage, to query and manage the reward program. In our example, we generate 4 APIs to deal with the rewards programs:
+In our scenario, the TorCC credit card company holds data regarding the members, the credit cards and the reward programs. It provides rewards program in which multiple members share the reward program. TorCC CC wants to expose APIs for frontend or mobile usage, to query and manage the reward program. In our example, we generate 4 APIs to deal with the rewards programs:
 
 1. create a program
 2. query the status
@@ -89,7 +89,7 @@ This part guides you through the steps to deploy the rewards program application
 #
 # Part B: Do-it-yourself: Create the Rewards Application
 
-This scenario guides you through the steps to create the 4 APIs for the Dinosaur Credit Card to use and the backend application. By the end of the session, you&#39;ll know how to create and deploy the APIs.
+This scenario guides you through the steps to create the 4 APIs for the TorCC Credit Card to use and the backend application. By the end of the session, you&#39;ll know how to create and deploy the APIs.
 
 1. Project setup
 2. Linking a Datasource
@@ -229,15 +229,18 @@ In this step we setup the environment for development.  This step is also called
 
 Navigate to an empty folder using your command line and type:
 
+```
 lb
+```
 
 It will start the Yeoman generator, and allow you to make selections about your API using the command line. To recreate our Rewards application, select the following options:
 
+```
 \_-----\_
 
 |       |    ╭──────────────────────────╮
 
-|--(o)--|    │  Let&#39;s create a LoopBack │
+|--(o)--|    │  Let`s create a LoopBack │
 
 `---------´   │       application!       │
 
@@ -247,7 +250,7 @@ It will start the Yeoman generator, and allow you to make selections about your 
 
 |  ~  |
 
-\_\_&#39;.\_\_\_.&#39;\_\_
+\_\_`;.\_\_\_.`;\_\_
 
 ´   `  |° ´ Y `
 
@@ -259,7 +262,9 @@ It will start the Yeoman generator, and allow you to make selections about your 
 
 API, without any configured models or datasources)
 
-If you just hit Enter on the name of the application., you&#39;ll default to the folder you are currently in. In our case LoopBack will create a new folder called RewardsDemo for you.
+```
+
+If you just hit Enter on the name of the application., you will default to the folder you are currently in. In our case LoopBack will create a new folder called RewardsDemo for you.
 
 Once you made all choices, npm install will run automatically and pull down all the project dependencies for you. For an explanation of all the files and directories that the tool creates, see [Project layout reference (LoopBack documentation)](http://loopback.io/doc/en/lb3/Project-layout-reference.html).
 
@@ -296,19 +301,12 @@ For our example, we use the local in-memory datasource. We chose this option for
 The tool updates the applications OpenAPI (Swagger 2.0) definition file and the server/datasources.json file with settings for the new datasource. Here is the resulting declaration of the customerDB
 
 {
-
  "customerDB": {
-
   "name": "customerDB",
-
   "localStorage": "",
-
   "file": "",
-
   "connector": "memory"
-
   }
-
 }
 ```
 
