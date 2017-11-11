@@ -17,7 +17,7 @@ In addition, having the backend application on the same system as the data will 
 
 The backend server communicates with data assets on the z/OS system and generates 4 APIs to query and manage the reward program.
 
-![Alt text](../media/FlowArchitecture.png?raw=true)
+![Alt text](./media/FlowArchitecture.png?raw=true)
 
 # 1.Create a Node.js rewards program application with LoopBack framework.
 # 2.Deploy the Node.js application on z/OS to benefit from collocation advantages such as performance and security.
