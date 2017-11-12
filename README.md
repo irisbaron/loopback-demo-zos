@@ -392,11 +392,13 @@ customer.js
 
 Repeat this step for the following models:
 
+```
 Model: credit-card
 datasource: CreditCardDB
-Model&#39;s base class: PersistentModel
+Model's base class: PersistentModel
 Expose Credit-Card via the REST API : no
 Common model or server only: common
+```
 
 | Property | Type | Required | Default value |
 | --- | --- | --- | --- |
@@ -404,12 +406,13 @@ Common model or server only: common
 | Points | Number | true |   |
 | AccountType | String | true |   |
 
+```
 Model : Rewards
 datasource: rewardsDB
-Model&#39;s base class: PersistentModel
+Model's base class: PersistentModel
 Expose Credit-Card via the REST API : yes
 Common model or server only: common
-
+```
 No properties needed for the Rewards model.
 
 At this point you can explore the APIs created just by declaring the models.
