@@ -5,7 +5,7 @@
 
 In this tutorial, we will build a Node.js backend application on z/OS. The application accesses information that resides on z/OS and provides an API that can later be consumed by frontend applications and services. This tutorial will highlight the benefits of hosting the Node.js application on z/OS and will provide an introduction to Node.js development for traditional z/OS developers.
 
-Node.js is a very popular platform for developing scalable enterprise API tier. Built upon the JavaScript programming language, Node.js enables millions of developers to build and collaborate across frontend and backend aspects of an application. Furthermore, the Node.js community have and continue to develop a plethora of frameworks and modules to enable rich web applications.  In this tutorial, we will focus on one such open-source framework - LoopBack.  LoopBack is a highly-extensible, open-source framework, that allows you to create end-to-end REST APIs with minimum coding effort. It allows for agile development and quick iterations for expending and growing the enterprise solution. As Node.js is platform neutral, the development can be done on any platform independent on the deployment. Node.js on z/OS is now a first-class enterprise offering, making it ideal for hosting backend applications which require access to z/OS assets while providing performance, scalability and security. In this tutorial we showcase the business challenges that a typical customer on IBM Z might experience. We share a case study about a fictitious _TorCC_ credit card company, and how they leverage the capabilities of the z/OS system.
+Node.js is a very popular platform for developing scalable enterprise API tier. Built upon the JavaScript programming language, Node.js enables millions of developers to build and collaborate across frontend and backend aspects of an application. Furthermore, the Node.js community have and continue to develop a plethora of frameworks and modules to enable rich web applications.  In this tutorial, we will focus on one such open-source framework - LoopBack.  LoopBack is a highly-extensible, open-source framework, that allows you to create end-to-end REST APIs with minimum coding effort. It allows for agile development and quick iterations for expanding and growing the enterprise solution. As Node.js is platform neutral, the development can be done on any platform independent on the deployment. Node.js on z/OS is now a first-class enterprise offering, making it ideal for hosting backend applications which require access to z/OS assets while providing performance, scalability and security. In this tutorial we showcase the business challenges that a typical customer on IBM Z might experience. We share a case study about a fictitious _TorCC_ credit card company, and how they leverage the capabilities of the z/OS system.
 
 The TorCC credit card company provides a complex reward system as incentive program for its customers. It allows members to share their reward points. The company wishes to create a backend application that provides an API to query the status of the reward program, based on the member name or set of names. The resulting API can then be used by web or mobile applications (the frontend) for members to query the status of their reward points, whether individually or shared. It can also be used by other frontend applications, for example, to create internal reports or use analytics to provide recommendations to the members.
 
@@ -392,11 +392,11 @@ customer.js
 
 Repeat this step for the following models:
 
-**Model** _: credit-card
+Model: credit-card
 datasource: CreditCardDB
 Model&#39;s base class: PersistentModel
 Expose Credit-Card via the REST API : no
-Common model or server only: common_
+Common model or server only: common
 
 | Property | Type | Required | Default value |
 | --- | --- | --- | --- |
@@ -404,7 +404,7 @@ Common model or server only: common_
 | Points | Number | true |   |
 | AccountType | String | true |   |
 
-**Model** : _Rewards_
+Model : Rewards
 datasource: rewardsDB
 Model&#39;s base class: PersistentModel
 Expose Credit-Card via the REST API : yes
@@ -414,9 +414,9 @@ No properties needed for the Rewards model.
 
 At this point you can explore the APIs created just by declaring the models.
 
-###Building the model relations
+#### Building the model relations
 
-In a real-world application with multiple models, you typically need to define _relations_between the models. When you define a relation for a model, LoopBack adds a set of methods to the model. For more information see [Creating Model Relations (LoopBack documentation)](http://loopback.io/doc/en/lb3/Creating-model-relations.html)
+In a real-world application with multiple models, you typically need to define relations between the models. When you define a relation for a model, LoopBack adds a set of methods to the model. For more information see [Creating Model Relations (LoopBack documentation)](http://loopback.io/doc/en/lb3/Creating-model-relations.html)
 
 Our example contains the following relations:
 
@@ -475,7 +475,7 @@ For our example we added the following remote methods, with members names as par
 1. createAccount([names]) - create a rewards program account for current credit card holders.
 2. getPoints([names]) - query customer information. Check to see if they belong to the same reward program and then collect all the points, aggregate and return the sum.
 3. claimPoints([names]) - update users total points by making the appropriate updates to their credit card info.
-4. closeProgram([names]) - delete an account if members chose to close the account.
+4. closeAccount([names]) - delete an account if members chose to close the account.
 
 The application highlights the security capability of having the backend application resides on same platform as the data. The credit card and customer information is not exposed and does not leave the platform. All the logic happens inside the platform, at the same location as the data.**
 
