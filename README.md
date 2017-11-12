@@ -1,7 +1,7 @@
-
+﻿
 # Node.js on z/OS – Create Rewards Program APIs and deploy it on z/OS
 
-# Overview
+## Overview
 
 In this tutorial, we will build a Node.js backend application on z/OS. The application accesses information that resides on z/OS and provides an API that can later be consumed by frontend applications and services. This tutorial will highlight the benefits of hosting the Node.js application on z/OS and will provide an introduction to Node.js development for traditional z/OS developers.
 
@@ -13,24 +13,24 @@ The objective of this application is to enable a highly scalable set of APIs tha
 
 In addition, having the backend application on the same system as the data will also reduce cost of power, footprint, and cooling and decrease system complexity and management efforts, compared to a solution on a remote or distributed system.
 
-# Flow/Architecture
+## Flow/Architecture
 
 The backend server communicates with data assets on the z/OS system and generates 4 APIs to query and manage the reward program.
 
 ![Alt text](./media/FlowArchitecture.png?raw=true)
 
-# 1.Create a Node.js rewards program application with LoopBack framework.
-# 2.Deploy the Node.js application on z/OS to benefit from collocation advantages such as performance and security.
-# 3.Expose the rewards program APIs. The Credit card and customer info remains secure in the z/OS.
-# 4.Explore, test and consume the APIs created.
+ 1.Create a Node.js rewards program application with LoopBack framework.
+ 2.Deploy the Node.js application on z/OS to benefit from collocation advantages such as performance and security.
+ 3.Expose the rewards program APIs. The Credit card and customer info remains secure in the z/OS.
+ 4.Explore, test and consume the APIs created.
 
-# Featured technologies
+## Featured technologies
 
 - [js](https://nodejs.org/en/) - An asynchronous event driven JavaScript runtime, designed to build scalable applications
 - [LoopBack](https://loopback.io/) - A popular open-source Node.js framework for creating API
 - [npm](https://www.npmjs.com/) - package manager for the JavaScript programming language. Included with Node.js installation
 
-#Application Walkthrough
+## Application Walkthrough
 
 This section provides introduction experience into Node.js, to showcase the ease of writing Node.js applications and to familiarize with LoopBack concepts and components. It provides a couple of paths of engagement designed for different levels of experience.
 
@@ -49,7 +49,7 @@ The first part provides basic steps to run the application as is and get familia
 
 The second part guides you through the steps to recreate our rewards application. It provides basic information about LoopBack concepts such as datasources, models and relations. By the end of this part you should have the knowledge to create your own simple LoopBack application.
 
-# System prerequirements
+## System requirements
 
 **Node.js**
 Node.js is the server-side JavaScript platform. If you do not have Node.js installed, you can find the installer for your platform at [Node.js](https://nodejs.org/en/). For z/OS see [IBM SDK for Node.js on z/OS](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos). Please note, you can get a free trial version of Node.js on z/OS for testing at [free 90-day trial (SMP/E format)](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos/purchase) with installations instructions [here](https://www.ibm.com/support/knowledgecenter/SSTRRS_6.0.0/com.ibm.nodejs.zos.v6.doc/install.htm) or at [Node.js SDK on z/OS trial (pax format)](https://developer.ibm.com/node/sdk/ztp/) (downloads and instructions).
@@ -60,7 +60,7 @@ Verify installation:
 node -v
 ```
 
-### LoopBack
+**LoopBack**
 LoopBack is an open-source framework to rapidly build APIs in Node.js. To install LoopBack type the following:
 
 ```
@@ -69,37 +69,34 @@ npm install -g loopback-cli
 lb -v
 ```
 
-#
-
-# Part A: Deploy the Rewards Application
+## Part A: Deploy the Rewards Application
 
 This part guides you through the steps to deploy the rewards program application. By the end of the session you will understand the APIs and be able to explore and test the APIs created.
 
-1. Clone the repo
-2. Run the application
-3. Explore the APIs and test the application
+1.[Clone the repo](#clone-the-repo)
+2.[Run the application](#run-the-application)
+3.[Explore APIs and test application](#explore-apis-and-test-application)
 
-#
-# Part B: Do-it-yourself: Create the Rewards Application
+## Part B: Do-it-yourself: Create the Rewards Application
 
 This scenario guides you through the steps to create the 4 APIs for the TorCC Credit Card to use and the backend application. By the end of the session, you&#39;ll know how to create and deploy the APIs.
 
-1. Project setup
-2. Linking a Datasource
-3. Generating Model Objects
-4. Relating your Model Objects
-5. Application Initialization
-6. Creating application logic
-7. Explore Your API
+1. [Project setup](#project-setup)
+2. [Linking a Datasource](#linking-a-datasource)
+3. [Generating Model Objects](#generating-model-objects)
+4. [Relating your Model Objects](#relating-your-model-objects)
+5. [Application Initialization](#application-initialization)
+6. [Creating application logic](#creating-application-logic)
+7. [Explore Your API](#explore-your-api)
 
 Part A: Deploy the Rewards Application
 
-### 1. Clone the repo
+###Clone the repo
 
 Clone the repo locally. In a terminal, run:
 git clone https://github.com/ibmruntimes/loopback-demo-zos
 
-### 2. Run the application
+###Run the application
 
 ```
 cd loopback-demo-zos
@@ -167,7 +164,7 @@ customerId: 4,
 id: 4 }
 ```                             
 
-### 3. Explore the APIs and test the application
+###Explore APIs and test application
 
 Once the application is running, there is a http server listens on port 3000, which is the default port. You can explore your REST APIs created at [http://0.0.0.0:3000/explorer](http://0.0.0.0:3000/explorer). This URL will list all the APIs exposed by the application and available to use by the frontend.
 In the explorer, you can expend the API to see its details and also test it.
@@ -211,12 +208,9 @@ Curl
 $ curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/closeAccount" (DELETE)
 ```
 
+## Part B: Do-it-yourself: Create the Rewards application
 
-#
-
-# Part B: Do-it-yourself: Create the Rewards application
-
-###  1. Project setup
+### Project setup
 
 In this step we setup the environment for development.  This step is also called API scaffolding.
 
@@ -263,7 +257,7 @@ Once you made all choices, npm install will run automatically and pull down all 
 
 Now you have all the relevant parts for your development and can start building your API.
 
-### 2. Linking a Datasource
+### Linking a Datasource
 
 In this step we set up one or more datasource for the application. Datasources represent backend systems such as databases, external REST APIs, SOAP web services, and storage serviceFor more information, see [Defining data sources (LoopBack documentation)](http://loopback.io/doc/en/lb3/Connecting-models-to-data-sources).
 
@@ -307,7 +301,7 @@ datasource.json
 
 We showed steps to create the customer datasource. Similarly, repeat this step to generate the credit-card and rewards program datasources, named creditDB and rewardsDB, respectively.
 
-### 3. Generating Model Objects
+### Generating Model Objects
 
 In this step we add models to the project. A _LoopBack model is_ a JavaScript object that represents backend data such as databases. They are stored in JSON format and specify properties and other characteristics of the API. Models are connected to backend systems via data sources. Every LoopBack application has a set of default models, which you can extend to suit your application&#39;s requirements. You can also define custom models. For more information on models, see [Defining models (LoopBack documentation)](http://loopback.io/doc/en/lb3/Defining-models.html).
 
@@ -434,7 +428,7 @@ No properties needed for the Rewards model.
 
 At this point you can explore the APIs created just by declaring the models.
 
-### 4. Building the model relations
+###Building the model relations
 
 In a real-world application with multiple models, you typically need to define _relations_between the models. When you define a relation for a model, LoopBack adds a set of methods to the model. For more information see [Creating Model Relations (LoopBack documentation)](http://loopback.io/doc/en/lb3/Creating-model-relations.html)
 
