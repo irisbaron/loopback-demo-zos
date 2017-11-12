@@ -175,23 +175,23 @@ In our example we provided 4 APIs to handle the rewards program: getPoints, clai
 
 You can test these APIs as follows:
 
-- createAccount: 
+- createAccount
 ```
-$ curl -X POST -d "Members[]=Ross&amp;&amp;Members[]=Rachel" "http://localhost:3000/api/Rewards/createAccount" (CREATE)
+$ curl -X POST -d "Members[]=Ross&amp;&amp;Members[]=Rachel" "http://localhost:3000/api/Rewards/createAccount" 
 ```
 - getPoints
 ```
-$ curl -X GET -d 'Members[]=Monica&amp;&amp;Members[]=Chandler' 'http://localhost:3000/api/Rewards/getPoints'  (READ)
+$ curl -X GET -d 'Members[]=Monica&amp;&amp;Members[]=Chandler' 'http://localhost:3000/api/Rewards/getPoints'  
 ```
 You should see the amount of credit card rewards points that Monica and Chandler can redeem together:{&quot;TotalPoints&quot;:11125}
 
 - claimPoints
 ```
-$ curl -X PUT -H "Content-type:application/json" -d '{"claimedPoints":[{"Name":"Monica","Points":"1000"},{"Name":"Chandler","Points":"100"}]}' "http://localhost:3000/api/Rewards/claimPoints" (UPDATE)
+$ curl -X PUT -H "Content-type:application/json" -d '{"claimedPoints":[{"Name":"Monica","Points":"1000"},{"Name":"Chandler","Points":"100"}]}' "http://localhost:3000/api/Rewards/claimPoints" 
 ```
 - closeAccount
 ```
-$ curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/closeAccount" (DELETE)
+$ curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/closeAccount" 
 ```
 
 ## Part B: Do-it-yourself: Create the Rewards application
