@@ -73,9 +73,9 @@ lb -v
 
 This part guides you through the steps to deploy the rewards program application. By the end of the session you will understand the APIs and be able to explore and test the APIs created.
 
-1.[Clone the repo](#clone-the-repo)
-2.[Run the application](#run-the-application)
-3.[Explore APIs and test application](#explore-apis-and-test-application)
+1. [Clone the repo](#clone-the-repo)
+2. [Run the application](#run-the-application)
+3. [Explore APIs and test application](#explore-apis-and-test-application)
 
 ## Part B: Do-it-yourself: Create the Rewards Application
 
@@ -91,12 +91,12 @@ This scenario guides you through the steps to create the 4 APIs for the TorCC Cr
 
 Part A: Deploy the Rewards Application
 
-###Clone the repo
+### Clone the repo
 
 Clone the repo locally. In a terminal, run:
 git clone https://github.com/ibmruntimes/loopback-demo-zos
 
-###Run the application
+### Run the application
 
 ```
 cd loopback-demo-zos
@@ -164,7 +164,7 @@ customerId: 4,
 id: 4 }
 ```                             
 
-###Explore APIs and test application
+### Explore APIs and test application
 
 Once the application is running, there is a http server listens on port 3000, which is the default port. You can explore your REST APIs created at [http://0.0.0.0:3000/explorer](http://0.0.0.0:3000/explorer). This URL will list all the APIs exposed by the application and available to use by the frontend.
 In the explorer, you can expend the API to see its details and also test it.
