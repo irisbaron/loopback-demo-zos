@@ -58,7 +58,7 @@ Node.js is the server-side JavaScript platform. If you do not have Node.js insta
 Verify installation:
 
 ```
-node -v
+node --version
 ```
 
 **LoopBack**
