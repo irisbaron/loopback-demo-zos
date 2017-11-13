@@ -24,7 +24,7 @@ module.exports = function (Rewards) {
     var app = require('../../server/server')
     var Customers = app.models.Customer
     var CreditCards = app.models.CreditCard
-    var Rewards = app.models.Reward
+    var Rewards = app.models.Rewards
 
     Rewards.sendQuery(Members, Customers.getMember)
        .then(function (queryResults) {
@@ -60,7 +60,7 @@ module.exports = function (Rewards) {
   Rewards.createAccount = function (Members, cb) {
     var app = require('../../server/server')
     var Customers = app.models.Customer
-    var Rewards = app.models.Reward
+    var Rewards = app.models.Rewards
 
     Rewards.sendQuery(Members, Customers.getMember)
        .then(function (queryResults) {
@@ -104,7 +104,7 @@ module.exports = function (Rewards) {
     var app = require('../../server/server.js')
     var Customers = app.models.Customer
     var CreditCards = app.models.CreditCard
-    var Rewards = app.models.Reward
+    var Rewards = app.models.Rewards
     var Members = claimedPoints.map(function (claim) {
       return claim.Name
     })
