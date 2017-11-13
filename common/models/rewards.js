@@ -166,7 +166,7 @@ module.exports = function (Rewards) {
   Rewards.closeAccount = function (Members, cb) {
     var app = require('../../server/server.js')
     var Customers = app.models.Customer
-    var Rewards = app.models.Reward
+    var Rewards = app.models.Rewards
 
     Rewards.sendQuery(Members, Customers.getMember)
        .then(function (queryResults) {
