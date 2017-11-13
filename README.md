@@ -26,7 +26,7 @@ The backend server communicates with data assets on the z/OS system and generate
 
 ## Featured technologies
 
-- [js](https://nodejs.org/en/) - An asynchronous event driven JavaScript runtime, designed to build scalable applications
+- [Node.js](https://nodejs.org/en/) - An asynchronous event driven JavaScript runtime, designed to build scalable applications
 - [LoopBack](https://loopback.io/) - A popular open-source Node.js framework for creating API
 - [npm](https://www.npmjs.com/) - package manager for the JavaScript programming language. Included with Node.js installation
 
@@ -50,7 +50,8 @@ The first part provides basic steps to run the application as is and get familia
 The second part guides you through the steps to recreate our rewards application. It provides basic information about LoopBack concepts such as datasources, models and relations. By the end of this part you should have the knowledge to create your own simple LoopBack application.
 
 ## System requirements
-
+**git**
+Git is a distributed version control system. You can get git for [z/OS from Rocket Software.](http://www.rocketsoftware.com/zos-open-source/tools)
 **Node.js**
 Node.js is the server-side JavaScript platform. If you do not have Node.js installed, you can find the installer for your platform at [Node.js](https://nodejs.org/en/). For z/OS see [IBM SDK for Node.js on z/OS](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos). Please note, you can get a free trial version of Node.js on z/OS for testing at [free 90-day trial (SMP/E format)](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos/purchase) with installations instructions [here](https://www.ibm.com/support/knowledgecenter/SSTRRS_6.0.0/com.ibm.nodejs.zos.v6.doc/install.htm) or at [Node.js SDK on z/OS trial (pax format)](https://developer.ibm.com/node/sdk/ztp/) (downloads and instructions).
 
@@ -74,20 +75,20 @@ lb -v
 This part guides you through the steps to deploy the rewards program application. By the end of the session you will understand the APIs and be able to explore and test the APIs created.
 
 1. [Clone the repo](#clone-the-repo)
-2. [Run the application](#run-the-application)
+2. [Run the Application](#run-the-application)
 3. [Explore APIs and test application](#explore-apis-and-test-application)
 
 ## Part B: Do-it-yourself: Create the Rewards Application
 
 This scenario guides you through the steps to create the 4 APIs for the TorCC Credit Card to use and the backend application. By the end of the session, you&#39;ll know how to create and deploy the APIs.
 
-1. [Project setup](#project-setup)
+1. [Project Setup](#project-setup)
 2. [Linking a Datasource](#linking-a-datasource)
 3. [Generating Model Objects](#generating-model-objects)
-4. [Relating your Model Objects](#relating-your-model-objects)
+4. [Generating Relationships Between Models](#generating-relationships-between-models)
 5. [Application Initialization](#application-initialization)
-6. [Creating application logic](#creating-application-logic)
-7. [Explore Your API](#explore-your-api)
+6. [Adding Application Logic](#adding-application-logic)
+7. [Explore API and Test](#explore-api-and-test-the-application)
 
 Part A: Deploy the Rewards Application
 
@@ -96,7 +97,9 @@ Part A: Deploy the Rewards Application
 Clone the repo locally. In a terminal, run:
 git clone https://github.com/ibmruntimes/loopback-demo-zos
 
-### Run the application
+Alternatively, download the code as a zip file from https://github.com/ibmruntimes/loopback-demo-zos.
+
+### Run the Application
 
 ```
 cd loopback-demo-zos
@@ -109,62 +112,49 @@ node .
 The output will be:
 
 ```
+Customer created:  { Name: 'Ross', programId: null, id: 1 }
+Customer created: { Name: 'Rachel', programId: null, id: 2 }
 rewardsProgram created:  { id: 1 }
-
 rewardsProgram created:  { id: 2 }
-
-Customer Created  { Name: 'Joey', programId: 1, id: 1 }
-
-Customer Created  { Name: 'Phoebe', programId: 1, id: 2 }
-
-Customer Created:  { Name: 'Chandler', programId: 2, id: 3 }
-
-Customer Created:  { Name: 'Monica', programId: 2, id: 4 }
-
+CreditCard created:  { AccountNumber: 2,
+  Points: 1000,
+  AccountType: 'Silver',
+  customerId: 1,
+  id: 1 }
+Creditcard created:  { AccountNumber: 6,
+  Points: 30000,
+  AccountType: 'Platnium',
+  customerId: 2,
+  id: 2 }
+Customer created  { Name: 'Joey', programId: 1, id: 3 }
+Customer created  { Name: 'Phoebe', programId: 1, id: 4 }
+Customer created:  { Name: 'Chandler', programId: 2, id: 5 }
+Customer created:  { Name: 'Monica', programId: 2, id: 6 }
 Web server listening at: http://0.0.0.0:3000
-
 Browse your REST API at http://0.0.0.0:3000/explorer
-
-CreditCard Created:  { AccountNumber: 4,
-
-Points: 20000,
-
-AccountType: 'Platinum',
-
-customerId: 1,
-
-id: 1 }
-
-CreditCard Created:  { AccountNumber: 3,
-
-Points: 10000,
-
-AccountType: 'Platinum',
-
-id: 2 }
-
-CreditCard Created:  { AccountNumber: 1,
-
-Points: 1500,
-
-AccountType: 'Gold',
-
-customerId: 3,
-
-id: 3 }
-
-CreditCard Created:  { AccountNumber: 3,
-
-Points: 10000,
-
-AccountType: 'Platinum',
-
-customerId: 4,
-
-id: 4 }
+CreditCard created:  { AccountNumber: 4,
+  Points: 20000,
+  AccountType: 'Platinum',
+  customerId: 3,
+  id: 3 }
+CreditCard created:  { AccountNumber: 3,
+  Points: 10000,
+  AccountType: 'Platinum',
+  customerId: 4,
+  id: 4 }
+CreditCard created:  { AccountNumber: 1,
+  Points: 1500,
+  AccountType: 'Gold',
+  customerId: 5,
+  id: 5 }
+CreditCard created:  { AccountNumber: 5,
+  Points: 10000,
+  AccountType: 'Platnium',
+  customerId: 6,
+  id: 6 }
 ```                             
 
-### Explore APIs and test application
+### Explore APIs and Test Application
 
 Once the application is running, there is a http server listens on port 3000, which is the default port. You can explore your REST APIs created at [http://0.0.0.0:3000/explorer](http://0.0.0.0:3000/explorer). This URL will list all the APIs exposed by the application and available to use by the frontend.
 In the explorer, you can expend the API to see its details and also test it.
@@ -177,18 +167,21 @@ You can test these APIs as follows:
 
 - createAccount
 ```
-$ curl -X POST -d "Members[]=Ross&amp;&amp;Members[]=Rachel" "http://localhost:3000/api/Rewards/createAccount" 
+$ curl -X POST -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/createAccount" 
 ```
 - getPoints
 ```
-$ curl -X GET -d 'Members[]=Monica&amp;&amp;Members[]=Chandler' 'http://localhost:3000/api/Rewards/getPoints'  
+curl -X GET -d "Members[]=Monica&&Members[]=Chandler" "http://localhost:3000/api/Rewards/getPoints" 
 ```
-You should see the amount of credit card rewards points that Monica and Chandler can redeem together:{&quot;TotalPoints&quot;:11125}
+You should see the amount of credit card rewards points that Monica and Chandler can redeem together:{&quot;TotalPoints&quot;:11500}
 
 - claimPoints
 ```
 $ curl -X PUT -H "Content-type:application/json" -d '{"claimedPoints":[{"Name":"Monica","Points":"1000"},{"Name":"Chandler","Points":"100"}]}' "http://localhost:3000/api/Rewards/claimPoints" 
 ```
+You should see the amount of credit card rewards points remaining in the program:
+{"Status":{"Status":"Success","RemainingPoints":10400}
+
 - closeAccount
 ```
 $ curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/closeAccount" 
@@ -209,32 +202,11 @@ lb
 It will start the Yeoman generator, and allow you to make selections about your API using the command line. To recreate our Rewards application, select the following options:
 
 ```
-\_-----\_
-
-|       |    ╭──────────────────────────╮
-
-|--(o)--|    │  Let`s create a LoopBack │
-
-`---------´   │       application!       │
-
-( \_´U`\_ )    ╰──────────────────────────╯
-
-/\_\_\_A\_\_\_\   /
-
-|  ~  |
-
-\_\_`;.\_\_\_.`;\_\_
-
-´   `  |° ´ Y `
-
 ? What's the name of your application? RewardsDemo
-
+? Enter name of the directory to contain the project: (RewardsDemo)
 ? Which version of LoopBack would you like to use? 3.x (current)
-
 ? **What kind of application do you have in mind?** empty-server (An empty LoopBack
-
 API, without any configured models or datasources)
-
 ```
 
 If you just hit Enter on the name of the application., you will default to the folder you are currently in. In our case LoopBack will create a new folder called RewardsDemo for you.
@@ -261,12 +233,9 @@ lb datasource
 Just like the previous step, LoopBack will walk you through the necessary configuration steps. We will first create the customer datasource. For this select the following options:
 
 ```
-?Enter the datasource name:customerDB
-
-?Select the connector for customerDB:In-memory db (supported by StrongLoop)
-
+?Enter the datasource name:customerRecords
+?Select the connector for customerRecords:In-memory db (supported by StrongLoop)
 ?window.localStorage key to use for persistence (browser only):
-
 ?Full path to file for persistence (server only):
 
 For our example, we use the local in-memory datasource. We chose this option for simplicity, eliminating the need to control and manage a real data store. The in-memory datasource is built in to LoopBack and suitable for development and testing. LoopBack also provides several custom connectors for realistic back-end data store, such as DB2. Once under production you would choose the datasource that properly fit your setup.
@@ -274,8 +243,8 @@ For our example, we use the local in-memory datasource. We chose this option for
 The tool updates the applications OpenAPI (Swagger 2.0) definition file and the server/datasources.json file with settings for the new datasource. Here is the resulting declaration of the customerDB
 
 {
- "customerDB": {
-  "name": "customerDB",
+ "customerRecords": {
+  "name": "customerRecords",
   "localStorage": "",
   "file": "",
   "connector": "memory"
@@ -285,7 +254,7 @@ The tool updates the applications OpenAPI (Swagger 2.0) definition file and the 
 
 datasource.json
 
-We showed steps to create the customer datasource. Similarly, repeat this step to generate the credit-card and rewards program datasources, named creditDB and rewardsDB, respectively.
+We showed steps to create the customer datasource. Similarly, repeat this step to generate the credit-card and rewards program datasources, named creditCardRecords and rewardsProgramRecords, respectively.
 
 ### Generating Model Objects
 
@@ -306,26 +275,22 @@ Just like before, you&#39;ll be walked through the process of making a model obj
 ```
 ?Enter the model name:Customer
 
-?Select the datasource to attach Customer to:CustomerDB (memory)
+?Select the datasource to attach Customer to:customerRecords (memory)
 
 ?Select model's base classPersistedModel
 
-?Expose Customer via the REST API?Yes
+?Expose Customer via the REST API? No
 
-?Custom plural form (used to build REST URL):
-
-?Common model or server only?common
+?Common model or server only? common
 
 Let's add some Customer properties now.
 
 Enter an empty property name when done.
 
 ?Property name:name
-```
 
 invoke   loopback:property
 
-```
 ?Property type:string
 
 ?Required?Yes
@@ -358,18 +323,7 @@ The result is two new files under common/model directory. The first is customer.
     }
   },
   "validations": [],
-  "relations": {
-    "creditCards": {
-      "type": "hasMany",
-      "model": "CreditCard",
-      "foreignKey": "customerId"
-    },
-   "rewardsProgram": {
-      "type": "belongsTo",
-      "model": "Reward",
-      "foreignKey": "programId"
-    } 
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }
@@ -394,30 +348,31 @@ Repeat this step for the following models:
 
 ```
 Model: credit-card
-datasource: CreditCardDB
+datasource: CreditCardRecords
 Model's base class: PersistentModel
-Expose Credit-Card via the REST API : no
+Expose Credit-Card via the REST API : No
 Common model or server only: common
 ```
 
 | Property | Type | Required | Default value |
-| --- | --- | --- | --- |
-| AccountNumber | Number | true |   |
-| Points | Number | true |   |
-| AccountType | String | true |   |
+| --- | --- | --- | --- | No
+| AccountNumber | Number | true |  No |
+| Points | Number | true |  No |
+| AccountType | String | true |  No |
 
 ```
 Model : Rewards
-datasource: rewardsDB
+datasource: rewardsProgramRecords
 Model's base class: PersistentModel
-Expose Credit-Card via the REST API : yes
+Expose Credit-Card via the REST API : Yes
+Custom plural form (used to build REST URL):
 Common model or server only: common
 ```
 No properties needed for the Rewards model.
 
 At this point you can explore the APIs created just by declaring the models.
 
-#### Building the model relations
+### Generating Relationships between Models
 
 In a real-world application with multiple models, you typically need to define relations between the models. When you define a relation for a model, LoopBack adds a set of methods to the model. For more information see [Creating Model Relations (LoopBack documentation)](http://loopback.io/doc/en/lb3/Creating-model-relations.html)
 
@@ -439,37 +394,29 @@ Just like before, you will be walked through the process of making a relation, a
 
 ```
 ?Select the model to create the relationship from:Customer
-
 ?Relation type:has many
-
 ?Choose a model to create a relationship with:(other)
-
 ?Enter the model name:CreditCard
-
 ?Enter the property name for the relation:creditCards
-
 ?Optionally enter a custom foreign key:customerId
-
-?Require a through model?No
-
-?Allow the relation to be nested in REST APIs:Yes
-
+?Require a through model? No
+?Allow the relation to be nested in REST APIs: No 
 ?Disable the relation from being included:Yes
 ```
 
 Repeat this step for the other relations mentioned above.
 
-### 5. Application Initialization
+### Application Initialization
 
-The LoopBack provides a mechanism to initialize the application, also known as boostrapping. When the application starts the LoopBack bootstrapper configures the datasources, models and application settings. In addition, it runs the boot scripts under the /server/boot directory. For more information [Defining boot scripts (LoopBack documentation)](https://loopback.io/doc/en/lb2/Defining-boot-scripts).
+The LoopBack provides a mechanism to initialize the application, also known as bootstrapping. When the application starts the LoopBack bootstrapper configures the datasources, models and application settings. In addition, it runs the boot scripts under the /server/boot directory. For more information [Defining boot scripts (LoopBack documentation)](https://loopback.io/doc/en/lb2/Defining-boot-scripts).
 
 For our Rewards application, we initialize some data to be used for testing. For simplicity, clone the example in another directory.
 ```
 git clone https://github.com/ibmruntimes/loopback-demo-zos
 ```
-Then simply copy over the files under server/boot into your own server/boot directory
+Then simply copy over the files under server/boot into your own server/boot directory.
 
-### 6. Adding application logic
+### Adding Application Logic
 
 LoopBack provides out-of-the-box model REST APIs that cover the CRUD functions for the model. In order to expose additional functionality we need to create custom methods, known as remote methods. These methods are static methods of a model, exposed over a custom REST endpoint. All of these methods should be under [model].js file.
 
@@ -482,8 +429,19 @@ For our example we added the following remote methods, with members names as par
 
 The application highlights the security capability of having the backend application resides on same platform as the data. The credit card and customer information is not exposed and does not leave the platform. All the logic happens inside the platform, at the same location as the data.**
 
-For the application logic, you can write your own code for those methods. Alternatively, you can copy over the code from common/models in the example code into your projects common/model
+For the application logic, you can write your own code for those methods. Alternatively, you can copy over the code (the .js files) from common/models in the example code into your projects common/model.
 
-### 7. Explore your API and test the application
+### Explore API and Test the Application
 
-Now that we have backend logic we can test the application itself. See Explore your API and test the application in Part A.
+Now that we have backend logic we can test the application itself. 
+
+From the project directory at the root folder type:
+
+```
+npm install
+
+node .
+```
+
+
+See [Explore APIs and test application](#explore-apis-and-test-application) in Part A.
