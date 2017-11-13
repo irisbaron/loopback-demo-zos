@@ -26,7 +26,7 @@ The backend server communicates with data assets on the z/OS system and generate
 
 ## Featured technologies
 
-- [js](https://nodejs.org/en/) - An asynchronous event driven JavaScript runtime, designed to build scalable applications
+- [Node.js](https://nodejs.org/en/) - An asynchronous event driven JavaScript runtime, designed to build scalable applications
 - [LoopBack](https://loopback.io/) - A popular open-source Node.js framework for creating API
 - [npm](https://www.npmjs.com/) - package manager for the JavaScript programming language. Included with Node.js installation
 
@@ -74,29 +74,29 @@ lb -v
 This part guides you through the steps to deploy the rewards program application. By the end of the session you will understand the APIs and be able to explore and test the APIs created.
 
 1. [Clone the repo](#clone-the-repo)
-2. [Run the application](#run-the-application)
+2. [Run the Application](#run-the-application)
 3. [Explore APIs and test application](#explore-apis-and-test-application)
 
 ## Part B: Do-it-yourself: Create the Rewards Application
 
 This scenario guides you through the steps to create the 4 APIs for the TorCC Credit Card to use and the backend application. By the end of the session, you&#39;ll know how to create and deploy the APIs.
 
-1. [Project setup](#project-setup)
+1. [Project Setup](#project-setup)
 2. [Linking a Datasource](#linking-a-datasource)
 3. [Generating Model Objects](#generating-model-objects)
 4. [Relating your Model Objects](#relating-your-model-objects)
 5. [Application Initialization](#application-initialization)
-6. [Creating application logic](#creating-application-logic)
+6. [Creating Application Logic](#creating-application-logic)
 7. [Explore Your API](#explore-your-api)
 
 Part A: Deploy the Rewards Application
 
-### Clone the repo
+### 1. Clone the repo
 
 Clone the repo locally. In a terminal, run:
 git clone https://github.com/ibmruntimes/loopback-demo-zos
 
-### Run the application
+### 2. Run the Application
 
 ```
 cd loopback-demo-zos
@@ -151,7 +151,7 @@ CreditCard created:  { AccountNumber: 5,
   id: 6 }
 ```                             
 
-### Explore APIs and test application
+### 3. Explore APIs and Test Application
 
 Once the application is running, there is a http server listens on port 3000, which is the default port. You can explore your REST APIs created at [http://0.0.0.0:3000/explorer](http://0.0.0.0:3000/explorer). This URL will list all the APIs exposed by the application and available to use by the frontend.
 In the explorer, you can expend the API to see its details and also test it.
@@ -186,7 +186,7 @@ $ curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/ap
 
 ## Part B: Do-it-yourself: Create the Rewards application
 
-### Project setup
+### 1. Project setup
 
 In this step we setup the environment for development.  This step is also called API scaffolding.
 
@@ -212,7 +212,7 @@ Once you made all choices, npm install will run automatically and pull down all 
 
 Now you have all the relevant parts for your development and can start building your API.
 
-### Linking a Datasource
+### 2. Linking a Datasource
 
 In this step we set up one or more datasource for the application. Datasources represent backend systems such as databases, external REST APIs, SOAP web services, and storage serviceFor more information, see [Defining data sources (LoopBack documentation)](http://loopback.io/doc/en/lb3/Connecting-models-to-data-sources).
 
@@ -253,7 +253,7 @@ datasource.json
 
 We showed steps to create the customer datasource. Similarly, repeat this step to generate the credit-card and rewards program datasources, named creditCardRecords and rewardsProgramRecords, respectively.
 
-### Generating Model Objects
+### 3. Generating Model Objects
 
 In this step we add models to the project. A _LoopBack model is_ a JavaScript object that represents backend data such as databases. They are stored in JSON format and specify properties and other characteristics of the API. Models are connected to backend systems via data sources. Every LoopBack application has a set of default models, which you can extend to suit your application&#39;s requirements. You can also define custom models. For more information on models, see [Defining models (LoopBack documentation)](http://loopback.io/doc/en/lb3/Defining-models.html).
 
@@ -369,7 +369,7 @@ No properties needed for the Rewards model.
 
 At this point you can explore the APIs created just by declaring the models.
 
-#### Building the model relations
+#### 4. Building the Model Relations
 
 In a real-world application with multiple models, you typically need to define relations between the models. When you define a relation for a model, LoopBack adds a set of methods to the model. For more information see [Creating Model Relations (LoopBack documentation)](http://loopback.io/doc/en/lb3/Creating-model-relations.html)
 
@@ -405,15 +405,15 @@ Repeat this step for the other relations mentioned above.
 
 ### 5. Application Initialization
 
-The LoopBack provides a mechanism to initialize the application, also known as boostrapping. When the application starts the LoopBack bootstrapper configures the datasources, models and application settings. In addition, it runs the boot scripts under the /server/boot directory. For more information [Defining boot scripts (LoopBack documentation)](https://loopback.io/doc/en/lb2/Defining-boot-scripts).
+The LoopBack provides a mechanism to initialize the application, also known as bootstrapping. When the application starts the LoopBack bootstrapper configures the datasources, models and application settings. In addition, it runs the boot scripts under the /server/boot directory. For more information [Defining boot scripts (LoopBack documentation)](https://loopback.io/doc/en/lb2/Defining-boot-scripts).
 
 For our Rewards application, we initialize some data to be used for testing. For simplicity, clone the example in another directory.
 ```
 git clone https://github.com/ibmruntimes/loopback-demo-zos
 ```
-Then simply copy over the files under server/boot into your own server/boot directory
+Then simply copy over the files under server/boot into your own server/boot directory.
 
-### 6. Adding application logic
+### 6. Adding Application Logic
 
 LoopBack provides out-of-the-box model REST APIs that cover the CRUD functions for the model. In order to expose additional functionality we need to create custom methods, known as remote methods. These methods are static methods of a model, exposed over a custom REST endpoint. All of these methods should be under [model].js file.
 
@@ -426,9 +426,9 @@ For our example we added the following remote methods, with members names as par
 
 The application highlights the security capability of having the backend application resides on same platform as the data. The credit card and customer information is not exposed and does not leave the platform. All the logic happens inside the platform, at the same location as the data.**
 
-For the application logic, you can write your own code for those methods. Alternatively, you can copy over the code (the .js files) from common/models in the example code into your projects common/model
+For the application logic, you can write your own code for those methods. Alternatively, you can copy over the code (the .js files) from common/models in the example code into your projects common/model.
 
-### 7. Explore your API and test the application
+### 7. Explore your API and Test the Application
 
 Now that we have backend logic we can test the application itself. 
 
