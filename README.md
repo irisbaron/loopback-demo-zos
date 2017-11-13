@@ -109,59 +109,46 @@ node .
 The output will be:
 
 ```
+Customer created:  { Name: 'Ross', programId: null, id: 1 }
+Customer created: { Name: 'Rachel', programId: null, id: 2 }
 rewardsProgram created:  { id: 1 }
-
 rewardsProgram created:  { id: 2 }
-
-Customer Created  { Name: 'Joey', programId: 1, id: 1 }
-
-Customer Created  { Name: 'Phoebe', programId: 1, id: 2 }
-
-Customer Created:  { Name: 'Chandler', programId: 2, id: 3 }
-
-Customer Created:  { Name: 'Monica', programId: 2, id: 4 }
-
+CreditCard created:  { AccountNumber: 2,
+  Points: 1000,
+  AccountType: 'Silver',
+  customerId: 1,
+  id: 1 }
+Creditcard created:  { AccountNumber: 6,
+  Points: 30000,
+  AccountType: 'Platnium',
+  customerId: 2,
+  id: 2 }
+Customer created  { Name: 'Joey', programId: 1, id: 3 }
+Customer created  { Name: 'Phoebe', programId: 1, id: 4 }
+Customer created:  { Name: 'Chandler', programId: 2, id: 5 }
+Customer created:  { Name: 'Monica', programId: 2, id: 6 }
 Web server listening at: http://0.0.0.0:3000
-
 Browse your REST API at http://0.0.0.0:3000/explorer
-
-CreditCard Created:  { AccountNumber: 4,
-
-Points: 20000,
-
-AccountType: 'Platinum',
-
-customerId: 1,
-
-id: 1 }
-
-CreditCard Created:  { AccountNumber: 3,
-
-Points: 10000,
-
-AccountType: 'Platinum',
-
-id: 2 }
-
-CreditCard Created:  { AccountNumber: 1,
-
-Points: 1500,
-
-AccountType: 'Gold',
-
-customerId: 3,
-
-id: 3 }
-
-CreditCard Created:  { AccountNumber: 3,
-
-Points: 10000,
-
-AccountType: 'Platinum',
-
-customerId: 4,
-
-id: 4 }
+CreditCard created:  { AccountNumber: 4,
+  Points: 20000,
+  AccountType: 'Platinum',
+  customerId: 3,
+  id: 3 }
+CreditCard created:  { AccountNumber: 3,
+  Points: 10000,
+  AccountType: 'Platinum',
+  customerId: 4,
+  id: 4 }
+CreditCard created:  { AccountNumber: 1,
+  Points: 1500,
+  AccountType: 'Gold',
+  customerId: 5,
+  id: 5 }
+CreditCard created:  { AccountNumber: 5,
+  Points: 10000,
+  AccountType: 'Platnium',
+  customerId: 6,
+  id: 6 }
 ```                             
 
 ### Explore APIs and test application
@@ -177,18 +164,21 @@ You can test these APIs as follows:
 
 - createAccount
 ```
-$ curl -X POST -d "Members[]=Ross&amp;&amp;Members[]=Rachel" "http://localhost:3000/api/Rewards/createAccount" 
+$ curl -X POST -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/createAccount" 
 ```
 - getPoints
 ```
-$ curl -X GET -d 'Members[]=Monica&amp;&amp;Members[]=Chandler' 'http://localhost:3000/api/Rewards/getPoints'  
+curl -X GET -d "Members[]=Monica&&Members[]=Chandler" "http://localhost:3000/api/Rewards/getPoints" 
 ```
-You should see the amount of credit card rewards points that Monica and Chandler can redeem together:{&quot;TotalPoints&quot;:11125}
+You should see the amount of credit card rewards points that Monica and Chandler can redeem together:{&quot;TotalPoints&quot;:11500}
 
 - claimPoints
 ```
 $ curl -X PUT -H "Content-type:application/json" -d '{"claimedPoints":[{"Name":"Monica","Points":"1000"},{"Name":"Chandler","Points":"100"}]}' "http://localhost:3000/api/Rewards/claimPoints" 
 ```
+You should see the amount of credit card rewards points remaining in the program:
+{"Status":{"Status":"Success","RemainingPoints":10400}
+
 - closeAccount
 ```
 $ curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/closeAccount" 
@@ -209,32 +199,11 @@ lb
 It will start the Yeoman generator, and allow you to make selections about your API using the command line. To recreate our Rewards application, select the following options:
 
 ```
-\_-----\_
-
-|       |    ╭──────────────────────────╮
-
-|--(o)--|    │  Let`s create a LoopBack │
-
-`---------´   │       application!       │
-
-( \_´U`\_ )    ╰──────────────────────────╯
-
-/\_\_\_A\_\_\_\   /
-
-|  ~  |
-
-\_\_`;.\_\_\_.`;\_\_
-
-´   `  |° ´ Y `
-
 ? What's the name of your application? RewardsDemo
-
+? Enter name of the directory to contain the project: (RewardsDemo)
 ? Which version of LoopBack would you like to use? 3.x (current)
-
 ? **What kind of application do you have in mind?** empty-server (An empty LoopBack
-
 API, without any configured models or datasources)
-
 ```
 
 If you just hit Enter on the name of the application., you will default to the folder you are currently in. In our case LoopBack will create a new folder called RewardsDemo for you.
@@ -261,12 +230,9 @@ lb datasource
 Just like the previous step, LoopBack will walk you through the necessary configuration steps. We will first create the customer datasource. For this select the following options:
 
 ```
-?Enter the datasource name:customerDB
-
-?Select the connector for customerDB:In-memory db (supported by StrongLoop)
-
+?Enter the datasource name:customerRecords
+?Select the connector for customerRecords:In-memory db (supported by StrongLoop)
 ?window.localStorage key to use for persistence (browser only):
-
 ?Full path to file for persistence (server only):
 
 For our example, we use the local in-memory datasource. We chose this option for simplicity, eliminating the need to control and manage a real data store. The in-memory datasource is built in to LoopBack and suitable for development and testing. LoopBack also provides several custom connectors for realistic back-end data store, such as DB2. Once under production you would choose the datasource that properly fit your setup.
@@ -274,8 +240,8 @@ For our example, we use the local in-memory datasource. We chose this option for
 The tool updates the applications OpenAPI (Swagger 2.0) definition file and the server/datasources.json file with settings for the new datasource. Here is the resulting declaration of the customerDB
 
 {
- "customerDB": {
-  "name": "customerDB",
+ "customerRecords": {
+  "name": "customerRecords",
   "localStorage": "",
   "file": "",
   "connector": "memory"
@@ -285,7 +251,7 @@ The tool updates the applications OpenAPI (Swagger 2.0) definition file and the 
 
 datasource.json
 
-We showed steps to create the customer datasource. Similarly, repeat this step to generate the credit-card and rewards program datasources, named creditDB and rewardsDB, respectively.
+We showed steps to create the customer datasource. Similarly, repeat this step to generate the credit-card and rewards program datasources, named creditCardRecords and rewardsProgramRecords, respectively.
 
 ### Generating Model Objects
 
@@ -306,26 +272,22 @@ Just like before, you&#39;ll be walked through the process of making a model obj
 ```
 ?Enter the model name:Customer
 
-?Select the datasource to attach Customer to:CustomerDB (memory)
+?Select the datasource to attach Customer to:customerRecords (memory)
 
 ?Select model's base classPersistedModel
 
-?Expose Customer via the REST API?Yes
+?Expose Customer via the REST API? No
 
-?Custom plural form (used to build REST URL):
-
-?Common model or server only?common
+?Common model or server only? common
 
 Let's add some Customer properties now.
 
 Enter an empty property name when done.
 
 ?Property name:name
-```
 
 invoke   loopback:property
 
-```
 ?Property type:string
 
 ?Required?Yes
@@ -358,18 +320,7 @@ The result is two new files under common/model directory. The first is customer.
     }
   },
   "validations": [],
-  "relations": {
-    "creditCards": {
-      "type": "hasMany",
-      "model": "CreditCard",
-      "foreignKey": "customerId"
-    },
-   "rewardsProgram": {
-      "type": "belongsTo",
-      "model": "Reward",
-      "foreignKey": "programId"
-    } 
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }
@@ -394,9 +345,9 @@ Repeat this step for the following models:
 
 ```
 Model: credit-card
-datasource: CreditCardDB
+datasource: CreditCardRecords
 Model's base class: PersistentModel
-Expose Credit-Card via the REST API : no
+Expose Credit-Card via the REST API : No
 Common model or server only: common
 ```
 
@@ -407,10 +358,11 @@ Common model or server only: common
 | AccountType | String | true |   |
 
 ```
-Model : Rewards
-datasource: rewardsDB
+Model : reward
+datasource: rewardsProgramRecords
 Model's base class: PersistentModel
-Expose Credit-Card via the REST API : yes
+Expose Credit-Card via the REST API : Yes
+Custom plural form (used to build REST URL):
 Common model or server only: common
 ```
 No properties needed for the Rewards model.
@@ -439,21 +391,13 @@ Just like before, you will be walked through the process of making a relation, a
 
 ```
 ?Select the model to create the relationship from:Customer
-
 ?Relation type:has many
-
 ?Choose a model to create a relationship with:(other)
-
 ?Enter the model name:CreditCard
-
 ?Enter the property name for the relation:creditCards
-
 ?Optionally enter a custom foreign key:customerId
-
-?Require a through model?No
-
-?Allow the relation to be nested in REST APIs:Yes
-
+?Require a through model? No
+?Allow the relation to be nested in REST APIs: No 
 ?Disable the relation from being included:Yes
 ```
 
@@ -482,8 +426,19 @@ For our example we added the following remote methods, with members names as par
 
 The application highlights the security capability of having the backend application resides on same platform as the data. The credit card and customer information is not exposed and does not leave the platform. All the logic happens inside the platform, at the same location as the data.**
 
-For the application logic, you can write your own code for those methods. Alternatively, you can copy over the code from common/models in the example code into your projects common/model
+For the application logic, you can write your own code for those methods. Alternatively, you can copy over the code (the .js files) from common/models in the example code into your projects common/model
 
 ### 7. Explore your API and test the application
 
-Now that we have backend logic we can test the application itself. See Explore your API and test the application in Part A.
+Now that we have backend logic we can test the application itself. 
+
+From the project directory at the root folder type:
+
+```
+npm install
+
+node .
+```
+
+
+See [Explore APIs and test application](#explore-apis-and-test-application) in Part A.
