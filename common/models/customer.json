@@ -20,7 +20,7 @@
     },
    "rewardsProgram": {
       "type": "belongsTo",
-      "model": "Reward",
+      "model": "Rewards",
       "foreignKey": "programId"
     } 
   },
