@@ -50,7 +50,8 @@ The first part provides basic steps to run the application as is and get familia
 The second part guides you through the steps to recreate our rewards application. It provides basic information about LoopBack concepts such as datasources, models and relations. By the end of this part you should have the knowledge to create your own simple LoopBack application.
 
 ## System requirements
-
+**git**
+Git is a distributed version control system. You can get git for [z/OS from Rocket Software.](http://www.rocketsoftware.com/zos-open-source/tools)
 **Node.js**
 Node.js is the server-side JavaScript platform. If you do not have Node.js installed, you can find the installer for your platform at [Node.js](https://nodejs.org/en/). For z/OS see [IBM SDK for Node.js on z/OS](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos). Please note, you can get a free trial version of Node.js on z/OS for testing at [free 90-day trial (SMP/E format)](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos/purchase) with installations instructions [here](https://www.ibm.com/support/knowledgecenter/SSTRRS_6.0.0/com.ibm.nodejs.zos.v6.doc/install.htm) or at [Node.js SDK on z/OS trial (pax format)](https://developer.ibm.com/node/sdk/ztp/) (downloads and instructions).
 
@@ -95,6 +96,8 @@ Part A: Deploy the Rewards Application
 
 Clone the repo locally. In a terminal, run:
 git clone https://github.com/ibmruntimes/loopback-demo-zos
+
+Alternatively, download the code as a zip file from https://github.com/ibmruntimes/loopback-demo-zos.
 
 ### 2. Run the Application
 
