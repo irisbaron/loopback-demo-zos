@@ -280,11 +280,11 @@ lb model
 Just like before, you&#39;ll be walked through the process of making a model object, all from the command line. Select the following options:
 
 ```
-?Enter the model name:Customer
+?Enter the model name: Customer
 
-?Select the datasource to attach Customer to:customerRecords (memory)
+?Select the datasource to attach Customer to: customerRecords (memory)
 
-?Select model's base classPersistedModel
+?Select model's base class PersistedModel
 
 ?Expose Customer via the REST API? No
 
@@ -294,7 +294,7 @@ Let's add some Customer properties now.
 
 Enter an empty property name when done.
 
-?Property name:name
+?Property name: Name
 
 invoke   loopback:property
 
@@ -354,7 +354,7 @@ customer.js
 Repeat this step for the following models:
 
 ```
-Model: credit-card
+Model: CreditCard
 datasource: CreditCardRecords
 Model's base class: PersistentModel
 Expose Credit-Card via the REST API : No
@@ -362,9 +362,13 @@ Common model or server only: common
 ```
 
 | Property | Type | Required | Default value |
+
 | --- | --- | --- | --- | No
+
 | AccountNumber | Number | true |  No |
+
 | Points | Number | true |  No |
+
 | AccountType | String | true |  No |
 
 ```
@@ -383,14 +387,14 @@ At this point you can explore the APIs created just by declaring the models.
 
 In a real-world application with multiple models, you typically need to define relations between the models. When you define a relation for a model, LoopBack adds a set of methods to the model. For more information see [Creating Model Relations (LoopBack documentation)](http://loopback.io/doc/en/lb3/Creating-model-relations.html)
 
-![Model Relations diagram](./media/ModelRelations.png?raw=true)
-
 Our example contains the following relations:
 
 - Customer hasMany credit cards
 - Credit card belongsTo customer
 - Customer belongsTo rewards
 - Rewards hasMany customers
+
+![Model Relations diagram](./media/ModelRelations.png?raw=true)
 
 Here are the steps to create the Customer hasMany credit cards relation.
 
@@ -436,7 +440,7 @@ For our example we added the following remote methods, with members names as par
 3. claimPoints([names]) - update users total points by making the appropriate updates to their credit card info.
 4. closeAccount([names]) - delete an account if members chose to close the account.
 
-The application highlights the security capability of having the backend application resides on same platform as the data. The credit card and customer information is not exposed and does not leave the platform. All the logic happens inside the platform, at the same location as the data.**
+The application highlights the security capability of having the backend application resides on same platform as the data. The credit card and customer information is not exposed and does not leave the platform. All the logic happens inside the platform, at the same location as the data.
 
 For the application logic, you can write your own code for those methods. Alternatively, you can copy over the code (the .js files) from common/models in the example code into your projects common/model.
 
