@@ -166,7 +166,7 @@ CreditCard created:  { AccountNumber: 5,
 Once the application is running, there is a http server listens on port 3000, which is the default port. You can explore your REST APIs created at [http://0.0.0.0:3000/explorer](http://0.0.0.0:3000/explorer). This URL will list all the APIs exposed by the application and available to use by the frontend.
 In the explorer, you can expend the API to see its details and also test it.
 
-To test specific API from the web browser, append the API name followed by the parameters in JSON format to the base URL. In our example the base URL is:   [http://localhost:3000/api/Rewards](http://localhost:3000/api/Rewards). Alternatively, use the curl command from the commanline in another shell.
+To test specific API from the web browser, append the API name followed by the parameters in JSON format to the base URL. In our example the base URL is:   [http://localhost:3000/api/Rewards](http://localhost:3000/api/Rewards). Alternatively, use the curl command from the commanline in another shell. You can also run it remotely by specifying the hostname instead of the 'localhost'.
 
 In our example we provided 4 APIs to handle the rewards program: getPoints, claimPoints, createProgram and closeProgram. The parameters for those API is list of members in JSON format. The table below provides description of the expected parameters and some examples to follow:
 
@@ -362,13 +362,9 @@ Common model or server only: common
 ```
 
 | Property | Type | Required | Default value |
-
-| --- | --- | --- | --- | No
-
+| --- | --- | --- | --- | No |
 | AccountNumber | Number | true |  No |
-
 | Points | Number | true |  No |
-
 | AccountType | String | true |  No |
 
 ```
@@ -406,18 +402,43 @@ lb relation
 Just like before, you will be walked through the process of making a relation, all from the command line. Select the following options:
 
 ```
-?Select the model to create the relationship from:Customer
+?Select the model to create the relationship from: Customer
 ?Relation type:has many
 ?Choose a model to create a relationship with:(other)
-?Enter the model name:CreditCard
-?Enter the property name for the relation:creditCards
-?Optionally enter a custom foreign key:customerId
+?Enter the model name: CreditCard
+?Enter the property name for the relation: creditCards
+?Optionally enter a custom foreign key: customerId
 ?Require a through model? No
 ?Allow the relation to be nested in REST APIs: No 
 ?Disable the relation from being included:Yes
 ```
 
-Repeat this step for the other relations mentioned above.
+The result is seen in common/model/customer.json
+
+```
+ "relations": {
+    "creditCards": {
+      "type": "hasMany",
+      "model": "CreditCard",
+      "foreignKey": "customerId"
+    },
+  
+```
+Snippet from customer.json
+
+
+Repeat this step for the other relations mentioned above. Here is a table to assist with the option selection. You can also consult the code in the git repository.
+
+|Relationship from| Relation type|Relationship with|Property name for the relation|Foreign key|
+|-----------------|--------------|-----------------|------------------------------|-----------|
+|Customer         | has many     |CreditCard       |creditCards                   |customerId |
+|CreditCard       | belong to    |Customer         |customer                      |customerId |
+|Customer         | belong to    |Rewards          |rewardsProgram                |programId  |
+|Rewards          | has many     |Customer         |customers                     |programId  |
+
+For the other options, enter the same responses as in the above  Customer - CreditCard relation example.
+
+    
 
 ### Application Initialization
 
