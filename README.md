@@ -17,7 +17,7 @@ In addition, having the backend application on the same system as the data will 
 
 The backend server communicates with data assets on the z/OS system and generates 4 APIs to query and manage the reward program.
 
-![Alt text](./media/FlowArchitecture.png?raw=true)
+![FlowArchitectureDiagram](./media/FlowArchitecture.png?raw=true)
 
  1.Create a Node.js rewards program application with LoopBack framework.
  2.Deploy the Node.js application on z/OS to benefit from collocation advantages such as performance and security.
@@ -375,6 +375,8 @@ At this point you can explore the APIs created just by declaring the models.
 ### Generating Relationships between Models
 
 In a real-world application with multiple models, you typically need to define relations between the models. When you define a relation for a model, LoopBack adds a set of methods to the model. For more information see [Creating Model Relations (LoopBack documentation)](http://loopback.io/doc/en/lb3/Creating-model-relations.html)
+
+![Model Relations diagram](./media/ModelRelations.png?raw=true)
 
 Our example contains the following relations:
 
