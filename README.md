@@ -361,11 +361,12 @@ Expose Credit-Card via the REST API : No
 Common model or server only: common
 ```
 
-| Property | Type | Required | Default value |
-| --- | --- | --- | --- | No |
-| AccountNumber | Number | true |  No |
-| Points | Number | true |  No |
-| AccountType | String | true |  No |
+| Property      | Type   | Required | Default value |
+| ------------- | ------ | -------- | ------------  |
+| AccountNumber | Number |   true   |     No        |
+| Points        | Number |   true   |     No        |
+| AccountType   | String |   true   |     No        |
+
 
 ```
 Model : Rewards
