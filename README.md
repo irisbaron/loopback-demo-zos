@@ -1,11 +1,9 @@
 ﻿
-# Node.js on z/OS – Create Rewards Program APIs and deploy it on z/OS
-
-## Overview
+# Node.js on z/OS – Create Rewards Program APIs and deploy on z/OS
 
 In this tutorial, we will build a Node.js backend application on z/OS. The application accesses information that resides on z/OS and provides an API that can later be consumed by frontend applications and services. This tutorial will highlight the benefits of hosting the Node.js application on z/OS and will provide an introduction to Node.js development for traditional z/OS developers.
 
-Node.js is a very popular platform for developing scalable enterprise API tier. Built upon the JavaScript programming language, Node.js enables millions of developers to build and collaborate across frontend and backend aspects of an application. Furthermore, the Node.js community have and continue to develop a plethora of frameworks and modules to enable rich web applications.  In this tutorial, we will focus on one such open-source framework - LoopBack.  LoopBack is a highly-extensible, open-source framework, that allows you to create end-to-end REST APIs with minimum coding effort. It allows for agile development and quick iterations for expanding and growing the enterprise solution. As Node.js is platform neutral, the development can be done on any platform independent on the deployment. Node.js on z/OS is now a first-class enterprise offering, making it ideal for hosting backend applications which require access to z/OS assets while providing performance, scalability and security. In this tutorial we showcase the business challenges that a typical customer on IBM Z might experience. We share a case study about a fictitious _TorCC_ credit card company, and how they leverage the capabilities of the z/OS system.
+Node.js is a very popular platform for developing scalable enterprise API tier. Built upon the JavaScript programming language, Node.js enables millions of developers to build and collaborate across frontend and backend aspects of an application. Furthermore, the Node.js community has and continue to develop a plethora of frameworks and modules to enable rich web applications.  In this tutorial, we will focus on one such open-source framework - LoopBack.  LoopBack is a highly-extensible, open-source framework, that allows you to create end-to-end REST APIs with minimum coding effort. It allows for agile development and quick iterations for expanding and growing the enterprise solution. As Node.js is platform neutral, the development can be done on any platform independent on the deployment. Node.js on z/OS is now a first-class enterprise offering, making it ideal for hosting backend applications which require access to z/OS assets while providing performance, scalability and security. In this tutorial we showcase the business challenges that a typical customer on IBM Z might experience. We share a case study about a fictitious _TorCC_ credit card company, and how they leverage the capabilities of the z/OS system.
 
 The TorCC credit card company provides a complex reward system as incentive program for its customers. It allows members to share their reward points. The company wishes to create a backend application that provides an API to query the status of the reward program, based on the member name or set of names. The resulting API can then be used by web or mobile applications (the frontend) for members to query the status of their reward points, whether individually or shared. It can also be used by other frontend applications, for example, to create internal reports or use analytics to provide recommendations to the members.
 
@@ -50,9 +48,9 @@ The first part provides basic steps to run the application as is and get familia
 The second part guides you through the steps to recreate our rewards application. It provides basic information about LoopBack concepts such as datasources, models and relations. By the end of this part you should have the knowledge to create your own simple LoopBack application.
 
 ## System requirements
-**git**
-Git is a distributed version control system. You can get git for [z/OS from Rocket Software.](http://www.rocketsoftware.com/zos-open-source/tools)
+
 **Node.js**
+
 Node.js is the server-side JavaScript platform. If you do not have Node.js installed, you can find the installer for your platform at [Node.js](https://nodejs.org/en/). For z/OS see [IBM SDK for Node.js on z/OS](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos). Please note, you can get a free trial version of Node.js on z/OS for testing at [free 90-day trial (SMP/E format)](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos/purchase) with installations instructions [here](https://www.ibm.com/support/knowledgecenter/SSTRRS_6.0.0/com.ibm.nodejs.zos.v6.doc/install.htm) or at [Node.js SDK on z/OS trial (pax format)](https://developer.ibm.com/node/sdk/ztp/) (downloads and instructions).
 
 Verify installation:
@@ -61,7 +59,9 @@ Verify installation:
 node --version
 ```
 
+
 **LoopBack**
+
 LoopBack is an open-source framework to rapidly build APIs in Node.js. To install LoopBack type the following:
 
 ```
@@ -70,7 +70,14 @@ npm install -g loopback-cli
 lb -v
 ```
 
-## Part A: Deploy the Rewards Application
+**git**
+
+Git is a distributed version control system. You can get git for [z/OS from Rocket Software.](http://www.rocketsoftware.com/zos-open-source/tools)
+
+
+## Steps ##
+
+### Part A: Deploy the Rewards Application
 
 This part guides you through the steps to deploy the rewards program application. By the end of the session you will understand the APIs and be able to explore and test the APIs created.
 
@@ -78,7 +85,7 @@ This part guides you through the steps to deploy the rewards program application
 2. [Run the Application](#run-the-application)
 3. [Explore APIs and test application](#explore-apis-and-test-application)
 
-## Part B: Do-it-yourself: Create the Rewards Application
+### Part B: Do-it-yourself: Create the Rewards Application
 
 This scenario guides you through the steps to create the 4 APIs for the TorCC Credit Card to use and the backend application. By the end of the session, you&#39;ll know how to create and deploy the APIs.
 
@@ -90,7 +97,7 @@ This scenario guides you through the steps to create the 4 APIs for the TorCC Cr
 6. [Adding Application Logic](#adding-application-logic)
 7. [Explore API and Test](#explore-api-and-test-the-application)
 
-Part A: Deploy the Rewards Application
+## Part A: Deploy the Rewards Application
 
 ### Clone the repo
 
