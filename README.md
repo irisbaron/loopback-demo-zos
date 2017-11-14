@@ -72,6 +72,9 @@ lb -v                              # Print Loopback version to validate client i
 
 Git is a distributed version control system. You can get git for [z/OS from Rocket Software.](http://www.rocketsoftware.com/zos-open-source/tools).
 
+**cURL**
+cURL is command line tool for transfer data in different protocols. You can get [cURL for z/OS from Rocket Software.](http://www.rocketsoftware.com/zos-open-source/tools).
+
 
 ## Steps ##
 
@@ -103,6 +106,11 @@ Clone the repo locally. In a terminal, run:
 
 ```bash
 git clone https://github.com/ibmruntimes/loopback-demo-zos
+```
+On z/OS run the following:
+
+```bash
+git clone git://github.com/ibmruntimes/loopback-demo-zos
 ```
 
 Alternatively, download the tutorial code as a zip file from [here](https://github.com/ibmruntimes/loopback-demo-zos/archive/master.zip).
@@ -248,7 +256,7 @@ Just like the previous step, LoopBack will walk you through the necessary config
 
 For our example, we use the local in-memory datasource. We chose this option for simplicity, eliminating the need to control and manage a real data store. The in-memory datasource is built in to LoopBack and suitable for development and testing. LoopBack also provides several custom connectors for realistic back-end data store, such as DB2. Once under production you would choose the datasource that properly fit your setup.
 
-The tool updates the applications OpenAPI (Swagger 2.0) definition file and the server/datasources.json file with settings for the new datasource. Here is the resulting declaration of the customerDB
+The tool updates the applications OpenAPI (Swagger 2.0) definition file and the server/datasources.json file with settings for the new datasource. Here is the resulting declaration of the customerRecords:
 
 ```javascript
 {
