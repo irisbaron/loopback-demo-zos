@@ -246,10 +246,10 @@ Type the following into your command line:
 lb datasource
 ```
 
-Just like the previous step, LoopBack will walk you through the necessary configuration steps. We will first create the customer datasource. For this select the following options:
+Just like the previous step, LoopBack will walk you through the necessary configuration steps. We will first create the customer datasource named `customerRecords`. Select the following options:
 
 ```
-?Enter the datasource name:customerRecords
+?Enter the datasource name: customerRecords
 ?Select the connector for customerRecords:In-memory db (supported by StrongLoop)
 ?window.localStorage key to use for persistence (browser only):
 ?Full path to file for persistence (server only):
@@ -257,7 +257,7 @@ Just like the previous step, LoopBack will walk you through the necessary config
 
 For our example, we use the local in-memory datasource. We chose this option for simplicity, eliminating the need to control and manage a real data store. The in-memory datasource is built in to LoopBack and suitable for development and testing. LoopBack also provides several custom connectors for realistic back-end data store, such as DB2. Once under production you would choose the datasource that properly fit your setup.
 
-The tool updates the applications OpenAPI (Swagger 2.0) definition file and the server/datasources.json file with settings for the new datasource. Here is the resulting declaration of the customerRecords:
+The tool updates the applications OpenAPI (Swagger 2.0) definition file and the `server/datasources.json` file with settings for the new datasource. Here is the resulting declaration of the customerRecords in `datasources.json`:
 
 ```javascript
 {
@@ -270,25 +270,21 @@ The tool updates the applications OpenAPI (Swagger 2.0) definition file and the 
 }
 ```
 
-datasource.json
-
-We showed steps to create the customer datasource. Similarly, repeat this step to generate the credit-card and rewards program datasources, named creditCardRecords and rewardsProgramRecords, respectively.
+We showed the steps to create the customer datasource. Repeat this step to generate the credit-card and rewards program datasources, named `creditCardRecords` and `rewardsProgramRecords`, respectively.
 
 ### Generating Model Objects
 
 In this step we add models to the project. A _LoopBack model_ is a JavaScript object that represents backend data such as databases. They are stored in JSON format and specify properties and other characteristics of the API. Models are connected to backend systems via data sources. Every LoopBack application has a set of default models, which you can extend to suit your application&#39;s requirements. You can also define custom models. For more information on models, see [Defining models (LoopBack documentation)](http://loopback.io/doc/en/lb3/Defining-models.html).
 
-In our example we have three models: customer, credit-card and rewards. Each of these models has its own properties and connects to its respective datasource.
+In our example we have three models: customer, credit-card and rewards. Each of these models has its own properties and connects to its respective datasource.  Here are the steps to generate the customer model.
 
-Here are the steps to generate the customer model.
-
-Still in the project directory at the root folder, type the following:
+In the project root directory, type the following:
 
 ```bash
 lb model
 ```
 
-Just like before, you&#39;ll be walked through the process of making a model object, all from the command line. Select the following options:
+Just like before, you'll be walked through the process of making a model object, all from the command line. Select the following options:
 
 ```
 ?Enter the model name: Customer
@@ -324,7 +320,9 @@ Enter an empty property name when done.
 
 After you get prompted to add another property, hit Enter to end the model creation dialog.
 
-The result is two new files under common/model directory. The first is customer.json which keeps all model data in JSON format, and the other is customer.js which is javascript initial code.
+The result is two new files under `common/model` directory. The first is `customer.json` which keeps all model data in JSON format, and the other is `customer.js` which contains initial JavaScript code.
+
+__customer.json:__
 
 ```javascript
 {
@@ -347,26 +345,20 @@ The result is two new files under common/model directory. The first is customer.
 }
 ```
 
-customer.json
+__customer.js:__
 
 ```javascript
 {
-
 use strict;
-
 module.exports = function(Customer) {
-
 };
-
 ```
 
-customer.js
-
-Repeat this step for the following models:
+Repeat this step to create the following `CreditCard`  model with related properties.
 
 ```
 Model: CreditCard
-datasource: CreditCardRecords
+datasource: creditCardRecords
 Model's base class: PersistentModel
 Expose Credit-Card via the REST API : No
 Common model or server only: common
@@ -374,22 +366,24 @@ Common model or server only: common
 
 | Property      | Type   | Required | Default value |
 | ------------- | ------ | -------- | ------------  |
-| AccountNumber | Number |   true   |     No        |
-| Points        | Number |   true   |     No        |
-| AccountType   | String |   true   |     No        |
+| AccountNumber | Number |   Y      |     No        |
+| Points        | Number |   Y      |     No        |
+| AccountType   | String |   Y      |     No        |
 
+
+Now, we create the `Rewards` model.  Given this application is a Rewards applications, for the `Rewards` model, we would want to expose the model via REST APIs.
 
 ```
 Model : Rewards
 datasource: rewardsProgramRecords
 Model's base class: PersistentModel
-Expose Credit-Card via the REST API : Yes
+Expose Rewards via the REST API : Yes
 Custom plural form (used to build REST URL):
 Common model or server only: common
 ```
-No properties needed for the Rewards model.
+No properties are needed for the Rewards model.
 
-At this point you can explore the APIs created just by declaring the models.
+At this point, you can explore the APIs created just by declaring the models.
 
 ### Generating Relationships between Models
 
@@ -406,12 +400,13 @@ Our example contains the following relations:
 
 Here are the steps to create the Customer hasMany credit cards relation.
 
-Still in the project directory at the root folder, type the following into your command line:
+In the project root directory, type the following command:
 
 ```
 lb relation
 ```
-Just like before, you will be walked through the process of making a relation, all from the command line. Select the following options:
+
+Loopback will step through the process of defining a relation. Select the following options:
 
 ```
 ?Select the model to create the relationship from: Customer
@@ -425,7 +420,7 @@ Just like before, you will be walked through the process of making a relation, a
 ?Disable the relation from being included:Yes
 ```
 
-The result is seen in common/model/customer.json
+The result is seen in `common/model/customer.json`:
 
 ```
  "relations": {
@@ -436,8 +431,6 @@ The result is seen in common/model/customer.json
     },
   
 ```
-Snippet from customer.json
-
 
 Repeat this step for the other relations mentioned above. Here is a table to assist with the option selection. You can also consult the code in the git repository.
 
@@ -448,13 +441,13 @@ Repeat this step for the other relations mentioned above. Here is a table to ass
 |Customer         | belong to    |Rewards          |rewardsProgram                |programId  |
 |Rewards          | has many     |Customer         |customers                     |programId  |
 
-For the other options, enter the same responses as in the above  Customer - CreditCard relation example.
+For the other options, enter the same responses as in the above Customer - CreditCard relation example.
 
     
 
 ### Application Initialization
 
-The LoopBack provides a mechanism to initialize the application, also known as bootstrapping. When the application starts the LoopBack bootstrapper configures the datasources, models and application settings. In addition, it runs the boot scripts under the `/server/boot` directory. For more information [Defining boot scripts (LoopBack documentation)](https://loopback.io/doc/en/lb2/Defining-boot-scripts).
+The LoopBack provides a mechanism to initialize the application known as bootstrapping. When the application starts the LoopBack bootstrapper, it will configure the datasources, models and application settings. In addition, it runs the boot scripts under the `/server/boot` directory. For more information [Defining boot scripts (LoopBack documentation)](https://loopback.io/doc/en/lb2/Defining-boot-scripts).
 
 For our Rewards application, we initialize some data to be used for testing. For simplicity, clone the example in another directory.
 
