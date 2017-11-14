@@ -164,7 +164,7 @@ CreditCard created:  { AccountNumber: 5,
 
 ### Explore APIs and Test Application
 
-The application launches a http server listening on the default port 3000. You can explore your REST APIs created at [http://localhost:3000/explorer](http://localhost:3000/explorer). This URL lists all the APIs exposed by the application and available for use.  In the explorer, you can expand the API to see its details and also test it.
+The application launches a http server listening on the default port 3000. You can explore your REST APIs created at [http://localhost:3000/explorer](http://localhost:3000/explorer). This URL lists all the APIs exposed by the application and available for use.  In the explorer, you can expand the APIs by selecting `List Operations` to see its details and also test them.
 
 To test a specific API from the web browser, append the API name followed by the parameters in JSON format to the base URL. In our example, the base URL is:   [http://localhost:3000/api/Rewards](http://localhost:3000/api/Rewards). Alternatively, use the `curl` command from the command-line in another shell/terminal. You can also invoke the API remotely by specifying the hostname instead of localhost.
 
