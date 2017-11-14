@@ -119,7 +119,7 @@ node .
 
 The output will be:
 
-```JSON
+```javascript
 Customer created:  { Name: 'Ross', programId: null, id: 1 }
 Customer created: { Name: 'Rachel', programId: null, id: 2 }
 rewardsProgram created:  { id: 1 }
