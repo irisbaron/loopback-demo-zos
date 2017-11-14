@@ -230,11 +230,13 @@ To create a datasource, make sure you are in your project directory at the root 
 ```bash
 cd RewardsDemo
 ```
+
 Type the following into your command line:
 
 ```bash
 lb datasource
 ```
+
 Just like the previous step, LoopBack will walk you through the necessary configuration steps. We will first create the customer datasource. For this select the following options:
 
 ```
@@ -242,11 +244,13 @@ Just like the previous step, LoopBack will walk you through the necessary config
 ?Select the connector for customerRecords:In-memory db (supported by StrongLoop)
 ?window.localStorage key to use for persistence (browser only):
 ?Full path to file for persistence (server only):
+```
 
 For our example, we use the local in-memory datasource. We chose this option for simplicity, eliminating the need to control and manage a real data store. The in-memory datasource is built in to LoopBack and suitable for development and testing. LoopBack also provides several custom connectors for realistic back-end data store, such as DB2. Once under production you would choose the datasource that properly fit your setup.
 
 The tool updates the applications OpenAPI (Swagger 2.0) definition file and the server/datasources.json file with settings for the new datasource. Here is the resulting declaration of the customerDB
 
+```javascript
 {
  "customerRecords": {
   "name": "customerRecords",
