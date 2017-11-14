@@ -1,5 +1,5 @@
 
-# Node.js on z/OS – Create Rewards Program APIs and deploy on z/OS
+# Node.js on z/OS - Create Rewards Program APIs and deploy on z/OS
 
 In this tutorial, we will build a Node.js backend application on z/OS. The application accesses information that resides on z/OS and provides an API that can later be consumed by frontend applications and services. This tutorial will highlight the benefits of hosting the Node.js application on z/OS and will provide an introduction to Node.js development for traditional z/OS developers.
 
@@ -11,7 +11,7 @@ The objective of this application is to enable a highly scalable set of APIs tha
 
 In addition, having the backend application on the same system as the data will also reduce cost of power, footprint, cooling, and decrease system complexity and management efforts, compared to a solution on a remote or distributed system.
 
-## Flow/Architecture
+## Flow / Architecture
 
 The backend server communicates with data assets on the z/OS system and generates 4 APIs to query and manage the reward program.
 
@@ -22,7 +22,7 @@ The backend server communicates with data assets on the z/OS system and generate
 3. Expose the rewards program APIs. The credit card and customer info remains secure in the z/OS.
 4. Explore, test and consume the APIs created.
 
-## Featured technologies
+## Featured Technologies
 
 - [Node.js](https://nodejs.org/en/) - An asynchronous event driven JavaScript runtime, designed to build scalable applications
 - [LoopBack](https://loopback.io/) - A popular open-source Node.js framework for creating APIs
@@ -47,32 +47,30 @@ The first part provides basic steps to run the application as is and get familia
 
 The second part guides you through the steps to recreate our rewards application. It provides basic information about LoopBack concepts such as datasources, models and relations. By the end of this part you should have the knowledge to create your own simple LoopBack application.
 
-## System requirements
+## System Requirements
 
 **Node.js**
 
 Node.js is the server-side JavaScript platform. If you do not have Node.js installed, you can find the installer for your platform at [Node.js](https://nodejs.org/en/). For z/OS see [IBM SDK for Node.js on z/OS](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos). Please note, you can get a free trial version of Node.js on z/OS for testing at [free 90-day trial (SMP/E format)](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos/purchase) with installations instructions [here](https://www.ibm.com/support/knowledgecenter/SSTRRS_6.0.0/com.ibm.nodejs.zos.v6.doc/install.htm) or at [Node.js SDK on z/OS trial (pax format)](https://developer.ibm.com/node/sdk/ztp/) (downloads and instructions).
 
-Verify installation:
+Verify installation with:
 
-```
+```bash
 node --version
 ```
-
 
 **LoopBack**
 
 LoopBack is an open-source framework to rapidly build APIs in Node.js. To install LoopBack type the following:
 
+```bash
+npm install -g loopback-cli        # Install the Loopback Client
+lb -v                              # Print Loopback version to validate client installation.
 ```
-npm install -g loopback-cli
 
-lb -v
-```
+**Git**
 
-**git**
-
-Git is a distributed version control system. You can get git for [z/OS from Rocket Software.](http://www.rocketsoftware.com/zos-open-source/tools)
+Git is a distributed version control system. You can get git for [z/OS from Rocket Software.](http://www.rocketsoftware.com/zos-open-source/tools).
 
 
 ## Steps ##
@@ -110,6 +108,8 @@ git clone https://github.com/ibmruntimes/loopback-demo-zos
 Alternatively, download the tutorial code as a zip file from [here](https://github.com/ibmruntimes/loopback-demo-zos/archive/master.zip).
 
 ### Run the Application
+
+In the tutorial code directory, install the node module dependencies with `npm`, and run the application.
 
 ```bash
 cd loopback-demo-zos
@@ -164,36 +164,32 @@ CreditCard created:  { AccountNumber: 5,
 
 ### Explore APIs and Test Application
 
-Once the application is running, there is a http server listens on port 3000, which is the default port. You can explore your REST APIs created at [http://localhost:3000/explorer](http://localhost:3000/explorer). This URL will list all the APIs exposed by the application and available to use by the frontend.
-In the explorer, you can expend the API to see its details and also test it.
+The application launches a http server listening on the default port 3000. You can explore your REST APIs created at [http://localhost:3000/explorer](http://localhost:3000/explorer). This URL lists all the APIs exposed by the application and available for use.  In the explorer, you can expand the API to see its details and also test it.
 
-To test specific API from the web browser, append the API name followed by the parameters in JSON format to the base URL. In our example the base URL is:   [http://localhost:3000/api/Rewards](http://localhost:3000/api/Rewards). Alternatively, use the `curl` command from the commanline in another shell. You can also run it remotely by specifying the host name instead of localhost.
+To test a specific API from the web browser, append the API name followed by the parameters in JSON format to the base URL. In our example, the base URL is:   [http://localhost:3000/api/Rewards](http://localhost:3000/api/Rewards). Alternatively, use the `curl` command from the command-line in another shell/terminal. You can also invoke the API remotely by specifying the hostname instead of localhost.
 
-In our example we provided 4 APIs to handle the rewards program: getPoints, claimPoints, createProgram and closeProgram. The parameters for those API is list of members in JSON format. The table below provides description of the expected parameters and some examples to follow:
+In our example, we provided 4 APIs to handle the rewards program: getPoints, claimPoints, createProgram and closeProgram. The parameters for those API is list of members in JSON format. The table below provides description of the expected parameters and some examples to follow:
 
 You can test these APIs as follows:
 
 - createAccount
-```
-$ curl -X POST -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/createAccount" 
-```
+
+        curl -X POST -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/createAccount" 
+        
 - getPoints
-```
-curl -X GET -d "Members[]=Monica&&Members[]=Chandler" "http://localhost:3000/api/Rewards/getPoints" 
-```
+
+        curl -X GET -d "Members[]=Monica&&Members[]=Chandler" "http://localhost:3000/api/Rewards/getPoints" 
 You should see the amount of credit card rewards points that Monica and Chandler can redeem together:`{'TotalPoints';:11500}`
 
 - claimPoints
-```
-$ curl -X PUT -H "Content-type:application/json" -d '{"claimedPoints":[{"Name":"Monica","Points":"1000"},{"Name":"Chandler","Points":"100"}]}' "http://localhost:3000/api/Rewards/claimPoints" 
-```
+
+        curl -X PUT -H "Content-type:application/json" -d '{"claimedPoints":[{"Name":"Monica","Points":"1000"},{"Name":"Chandler","Points":"100"}]}' "http://localhost:3000/api/Rewards/claimPoints" 
 You should see the amount of credit card rewards points remaining in the program:
 `{"Status":{"Status":"Success","RemainingPoints":10400}`
 
 - closeAccount
-```
-$ curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/closeAccount" 
-```
+
+        curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/closeAccount" 
 
 ## Part B: Do-it-yourself: Create the Rewards application
 
@@ -203,7 +199,7 @@ In this step we setup the environment for development.  This step is also called
 
 Navigate to an empty directory using your command line and type:
 
-```
+```bash
 lb
 ```
 
@@ -231,11 +227,12 @@ For our example we generate three datasources: customers, credit cards and rewar
 
 To create a datasource, make sure you are in your project directory at the root folder. If you followed the step 1, type:
 
-```
+```bash
 cd RewardsDemo
 ```
 Type the following into your command line:
-```
+
+```bash
 lb datasource
 ```
 Just like the previous step, LoopBack will walk you through the necessary configuration steps. We will first create the customer datasource. For this select the following options:
@@ -274,7 +271,7 @@ Here are the steps to generate the customer model.
 
 Still in the project directory at the root folder, type the following:
 
-```
+```bash
 lb model
 ```
 
@@ -316,7 +313,7 @@ After you get prompted to add another property, hit Enter to end the model creat
 
 The result is two new files under common/model directory. The first is customer.json which keeps all model data in JSON format, and the other is customer.js which is javascript initial code.
 
-```
+```javascript
 {
   "name": "Customer",
   "base": "PersistedModel",
@@ -335,11 +332,11 @@ The result is two new files under common/model directory. The first is customer.
   "acls": [],
   "methods": {}
 }
-
 ```
+
 customer.json
 
-```
+```javascript
 {
 
 use strict;
@@ -447,9 +444,11 @@ For the other options, enter the same responses as in the above  Customer - Cred
 The LoopBack provides a mechanism to initialize the application, also known as bootstrapping. When the application starts the LoopBack bootstrapper configures the datasources, models and application settings. In addition, it runs the boot scripts under the `/server/boot` directory. For more information [Defining boot scripts (LoopBack documentation)](https://loopback.io/doc/en/lb2/Defining-boot-scripts).
 
 For our Rewards application, we initialize some data to be used for testing. For simplicity, clone the example in another directory.
-```
+
+```bash
 git clone https://github.com/ibmruntimes/loopback-demo-zos
 ```
+
 Then simply copy over the files under server/boot into your own server/boot directory.
 
 ### Adding Application Logic
@@ -473,9 +472,8 @@ Now that we have backend logic we can test the application itself.
 
 From the project directory at the root folder type:
 
-```
+```bash
 npm install
-
 node .
 ```
 
