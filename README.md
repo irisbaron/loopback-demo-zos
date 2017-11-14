@@ -85,7 +85,7 @@ This part guides you through the steps to deploy the rewards program application
 
 1. [Clone the repo](#clone-the-repo)
 2. [Run the Application](#run-the-application)
-3. [Explore APIs and test application](#explore-apis-and-test-application)
+3. [Explore APIs and Test Application](#explore-apis-and-test-application)
 
 ### Part B: Do-it-yourself: Create the Rewards Application
 
@@ -97,7 +97,7 @@ This scenario guides you through the steps to create the 4 APIs for the TorCC cr
 4. [Generating Relationships Between Models](#generating-relationships-between-models)
 5. [Application Initialization](#application-initialization)
 6. [Adding Application Logic](#adding-application-logic)
-7. [Explore API and Test](#explore-api-and-test-the-application)
+7. [Explore APIs and Test the Application](#explore-apis-and-test-the-application)
 
 ## Part A: Deploy the Rewards Application
 
@@ -288,33 +288,21 @@ Just like before, you'll be walked through the process of making a model object,
 
 ```
 ?Enter the model name: Customer
-
 ?Select the datasource to attach Customer to: customerRecords (memory)
-
 ?Select model's base class PersistedModel
-
 ?Expose Customer via the REST API? No
-
 ?Common model or server only? common
-
 Let's add some Customer properties now.
 
 Enter an empty property name when done.
-
 ?Property name: Name
-
-invoke   loopback:property
-
+  invoke   loopback:property
 ?Property type:string
-
 ?Required?Yes
-
 ?Default value[leave blank for none]:
 
 Let's add another Customer property.
-
 Enter an empty property name when done.
-
 ?Property name:
 ```
 
@@ -429,7 +417,6 @@ The result is seen in `common/model/customer.json`:
       "model": "CreditCard",
       "foreignKey": "customerId"
     },
-  
 ```
 
 Repeat this step for the other relations mentioned above. Here is a table to assist with the option selection. You can also consult the code in the git repository.
@@ -472,7 +459,7 @@ The application highlights the security capability of having the backend applica
 
 For the application logic, you can write your own code for those methods. Alternatively, you can copy over the code (the .js files) from common/models in the example code into your projects common/model.
 
-### Explore API and Test the Application
+### Explore APIs and Test the Application
 
 Now that we have backend logic we can test the application itself. 
 
@@ -484,4 +471,4 @@ node .
 ```
 
 
-See [Explore APIs and test application](#explore-apis-and-test-application) in Part A.
+See [Explore APIs and Test Application](#explore-apis-and-test-application) in Part A.
