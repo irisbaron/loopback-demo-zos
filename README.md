@@ -1,4 +1,4 @@
-﻿
+
 # Node.js on z/OS – Create Rewards Program APIs and deploy on z/OS
 
 In this tutorial, we will build a Node.js backend application on z/OS. The application accesses information that resides on z/OS and provides an API that can later be consumed by frontend applications and services. This tutorial will highlight the benefits of hosting the Node.js application on z/OS and will provide an introduction to Node.js development for traditional z/OS developers.
@@ -102,23 +102,24 @@ This scenario guides you through the steps to create the 4 APIs for the TorCC Cr
 ### Clone the repo
 
 Clone the repo locally. In a terminal, run:
-git clone https://github.com/ibmruntimes/loopback-demo-zos
 
-Alternatively, download the code as a zip file from https://github.com/ibmruntimes/loopback-demo-zos.
+```bash
+git clone https://github.com/ibmruntimes/loopback-demo-zos
+```
+
+Alternatively, download the tutorial code as a zip file from [here](https://github.com/ibmruntimes/loopback-demo-zos/archive/master.zip).
 
 ### Run the Application
 
-```
+```bash
 cd loopback-demo-zos
-
 npm install
-
 node .
 ```
 
 The output will be:
 
-```
+```JSON
 Customer created:  { Name: 'Ross', programId: null, id: 1 }
 Customer created: { Name: 'Rachel', programId: null, id: 2 }
 rewardsProgram created:  { id: 1 }
