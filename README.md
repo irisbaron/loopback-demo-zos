@@ -387,7 +387,7 @@ At this point, you can explore the APIs created just by declaring the models.
 
 ### Generating Relationships between Models
 
-In a real-world application with multiple models, you typically need to define relations between the models. When you define a relation for a model, LoopBack adds a set of methods to the model. For more information see [Creating Model Relations (LoopBack documentation)](http://loopback.io/doc/en/lb3/Creating-model-relations.html)
+Real-world applications typically consist of multiple models with connections between them. These connections are defined as relations between the models. When you define a relation for a model, LoopBack adds a set of methods to the model which allows to interact with other related models in order to query and filter data. For more information see [Creating Model Relations (LoopBack documentation)](http://loopback.io/doc/en/lb3/Creating-model-relations.html)
 
 Our example contains the following relations:
 
@@ -447,7 +447,7 @@ For the other options, enter the same responses as in the above Customer - Credi
 
 ### Application Initialization
 
-The LoopBack provides a mechanism to initialize the application known as bootstrapping. When the application starts the LoopBack bootstrapper, it will configure the datasources, models and application settings. In addition, it runs the boot scripts under the `/server/boot` directory. For more information [Defining boot scripts (LoopBack documentation)](https://loopback.io/doc/en/lb2/Defining-boot-scripts).
+The LoopBack provides a mechanism to initialize the application known as bootstrapping. When the application starts the LoopBack bootstrapper, it will configure the datasources, models and application settings. In addition, it runs the boot scripts under the `/server/boot` directory. This allows to preload code and initialize data for the application during startup. For more information [Defining boot scripts (LoopBack documentation)](https://loopback.io/doc/en/lb2/Defining-boot-scripts).
 
 For our Rewards application, we initialize some data to be used for testing. For simplicity, clone the example in another directory.
 
