@@ -51,7 +51,7 @@ The second part guides you through the steps to recreate our rewards application
 
 **Node.js**
 
-Node.js is the server-side JavaScript platform. If you do not have Node.js installed, you can find the installer for your platform at [Node.js](https://nodejs.org/en/). For z/OS see [IBM SDK for Node.js on z/OS](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos). Please note, you can get a free trial version of Node.js on z/OS for testing at [free 90-day trial (SMP/E format)](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos/purchase) with installations instructions [here](https://www.ibm.com/support/knowledgecenter/SSTRRS_6.0.0/com.ibm.nodejs.zos.v6.doc/install.htm) or at [Node.js SDK on z/OS trial (pax format)](https://developer.ibm.com/node/sdk/ztp/) (downloads and instructions).
+Node.js is the server-side JavaScript platform. If you do not have Node.js installed, you can find the installer for your platform at [Node.js](https://nodejs.org/en/). For z/OS see [IBM SDK for Node.js on z/OS](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos). Please note, you can get a free trial version of Node.js on z/OS for testing at [free 90-day trial (SMP/E format)](https://www.ibm.com/us-en/marketplace/sdk-nodejs-compiler-zos/purchase) with installations instructions [here](https://www.ibm.com/support/knowledgecenter/SSTRRS_6.0.0/com.ibm.nodejs.zos.v6.doc/install.htm) or at [Node.js SDK on z/OS trial (pax format)](https://developer.ibm.com/node/sdk/ztp/) (downloads and instructions). Please follow the installation instructions provided, in particular for the pax format trial version. 
 
 Verify installation with:
 
@@ -114,8 +114,8 @@ On z/OS run the following:
 git clone git://github.com/ibmruntimes/loopback-demo-zos
 ```
 
-Alternatively, download the developer journey code as a zip file from [here](https://github.com/ibmruntimes/loopback-demo-zos/archive/master.zip).
-
+Alternatively, download the developer journey code as a zip file from [here](https://github.com/ibmruntimes/loopback-demo-zos/archive/master.zip). On z/OS, use 'unzip -a' to unzip.
+  
 ### Run the Application
 
 In the developer journey code directory, install the node module dependencies with `npm`, and run the application.
