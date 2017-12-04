@@ -1,7 +1,7 @@
 
 # Node.js on z/OS Sample Application
 
-##Create Rewards Program APIs and deploy on z/OS
+## Create Rewards Program APIs and deploy on z/OS
 
 In this developer journey we will build a Node.js backend application on z/OS. The application accesses information that resides on z/OS and provides an API that can later be consumed by frontend applications and services. This developer journey will highlight the benefits of hosting the Node.js application on z/OS and will provide an introduction to Node.js development for traditional z/OS developers.
 
