@@ -148,4 +148,4 @@ You should see the amount of credit card rewards points remaining in the program
 
 ## Part B: Do-it-yourself: Create the Rewards Application
 
-For the steps to create your own Rewards application, please follow this link to [RewardsApplication.md](https://github.com/ibmruntimes/loopback-demo-zos/edit/master/RewardsApplication.md).
+For the steps to create your own Rewards application, please follow this link to [RewardsApplication.md](https://github.com/ibmruntimes/loopback-demo-zos/blob/master/RewardsApplication.md).
