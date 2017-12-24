@@ -30,25 +30,6 @@ The backend server communicates with data assets on the z/OS system and generate
 - [LoopBack](https://loopback.io/) - A popular open-source Node.js framework for creating APIs
 - [npm](https://www.npmjs.com/) - package manager for the JavaScript programming language included with Node.js installation
 
-## Application Walkthrough
-
-This section provides introduction experience into Node.js, to showcase the ease of writing Node.js applications and to familiarize with LoopBack concepts and components. It provides a couple of paths of engagement designed for different levels of experience.
-
-In our scenario, the TorCC credit card company holds data regarding the members, the credit cards and the reward programs. It provides a rewards program in which multiple members share the reward program. TorCC wants to expose APIs for frontend or mobile usage, to query and manage the reward program. In our example, we generate 4 APIs to deal with the rewards programs:
-
-1. create a program
-2. query the status
-3. delete/close a program
-4. claim points
-
-These APIs cover the full spectrum of create, retrieve, update and delete (CRUD) functions
-
-While this developer journey targets z/OS users, you can create and run the application on any platform, in particular as our example data resides in memory, and is not tied to the platform. In practice z/OS customers probably have their data reside in DB2 or other asset on z/OS and thus will benefit from deploying the backend application on z/OS and collocating the application and the data.
-
-The first part provides basic steps to run the application as is and get familiarized with the APIs. Deploying it on a z/OS system would demonstrate that Node.js on z/OS is a first class citizen and it behaves similarly to any other platforms. By the end of this part, you will have setup your environment and know how to run a Node.js application and how to explore its APIs.
-
-The second part guides you through the steps to recreate our rewards application. It provides basic information about LoopBack concepts such as datasources, models and relations. By the end of this part you should have the knowledge to create your own simple LoopBack application.
-
 ## System Requirements
 
 **Node.js**
@@ -79,33 +60,28 @@ Git is a distributed version control system. You can get [git for z/OS from Rock
 cURL is command line tool for transfer data in different protocols. You can get [cURL for z/OS from Rocket Software.](http://www.rocketsoftware.com/zos-open-source/tools).
 
 
+## Application Walkthrough
+
+This section provides introduction experience into Node.js, to showcase the ease of writing Node.js applications and to familiarize with LoopBack concepts and components. It provides a couple of paths of engagement designed for different levels of experience.
+
+In our scenario, the TorCC credit card company holds data regarding the members, the credit cards and the reward programs. It provides a rewards program in which multiple members share the reward program. TorCC wants to expose APIs for frontend or mobile usage, to query and manage the reward program. In our example, we generate 4 APIs to deal with the rewards programs:
+
+1. create a program
+2. query the status
+3. delete/close a program
+4. claim points
+
+These APIs cover the full spectrum of create, retrieve, update and delete (CRUD) functions
+
+While this developer journey targets z/OS users, you can create and run the application on any platform, in particular as our example data resides in memory, and is not tied to the platform. In practice z/OS customers probably have their data reside in DB2 or other asset on z/OS and thus will benefit from deploying the backend application on z/OS and collocating the application and the data.
+
+The first part provides basic steps to run the application as is and get familiarized with the APIs. Deploying it on a z/OS system would demonstrate that Node.js on z/OS is a first class citizen and it behaves similarly to any other platforms. By the end of this part, you will have setup your environment and know how to run a Node.js application and how to explore its APIs.
+
+The second part guides you through the steps to recreate our rewards application. It provides basic information about LoopBack concepts such as datasources, models and relations. By the end of this part you should have the knowledge to create your own simple LoopBack application.
+
+
 ## Steps ##
-
-### Part A: Deploy the Rewards Application
-
-This part guides you through the steps to deploy the rewards program application. By the end of the session you will understand the APIs and be able to explore and test the APIs created.
-
-1. [Clone the repo](#clone-the-repo)
-2. [Run the Application](#run-the-application)
-3. [Explore APIs and Test Application](#explore-apis-and-test-application)
-
-### Part B: Do-it-yourself: Create the Rewards Application
-
-This scenario guides you through the steps to create the 4 APIs for the TorCC credit card to use and the backend application. By the end of the session, you will know how to create and deploy the APIs.
-
-1. [Project Setup](#project-setup)
-2. [Linking a Datasource](#linking-a-datasource)
-3. [Generating Model Objects](#generating-model-objects)
-4. [Generating Relationships Between Models](#generating-relationships-between-models)
-5. [Application Initialization](#application-initialization)
-6. [Adding Application Logic](#adding-application-logic)
-7. [Explore APIs and Test the Application](#explore-apis-and-test-the-application)
-
-## Part A: Deploy the Rewards Application
-
-### Clone the repo
-
-Clone the repo locally. In a terminal, run:
+To experience with the rewards application, ether by running it or creating it yourself, you first need to clone the repository locally. 
 
 ```bash
 git clone https://github.com/ibmruntimes/loopback-demo-zos
@@ -116,7 +92,11 @@ On z/OS run the following:
 git clone git://github.com/ibmruntimes/loopback-demo-zos
 ```
 
-Alternatively, download the developer journey code as a zip file from [here](https://github.com/ibmruntimes/loopback-demo-zos/archive/master.zip). On z/OS, use 'unzip -a' to unzip.
+Alternatively, download the developer journey code as a zip file from [here](https://github.com/ibmruntimes/loopback-demo-zos/archive/master.zip). On z/OS, use 'unzip -a' to unzip
+
+### Part A: Deploy the Rewards Application
+
+This part guides you through the steps to deploy the rewards program application. You will first clone the repository, run the application and then explore the APIs and test the application. By the end of the session you will understand the APIs and be able to explore and test the APIs created.
   
 ### Run the Application
 
@@ -128,49 +108,13 @@ npm install
 node .
 ```
 
-The output will be:
+The output shows the customers, credit cards and rewards program created. It will also include the following lines: 
 
 ```javascript
-Customer created:  { Name: 'Ross', programId: null, id: 1 }
-Customer created: { Name: 'Rachel', programId: null, id: 2 }
-rewardsProgram created:  { id: 1 }
-rewardsProgram created:  { id: 2 }
-CreditCard created:  { AccountNumber: 2,
-  Points: 1000,
-  AccountType: 'Silver',
-  customerId: 1,
-  id: 1 }
-Creditcard created:  { AccountNumber: 6,
-  Points: 30000,
-  AccountType: 'Platnium',
-  customerId: 2,
-  id: 2 }
-Customer created  { Name: 'Joey', programId: 1, id: 3 }
-Customer created  { Name: 'Phoebe', programId: 1, id: 4 }
-Customer created:  { Name: 'Chandler', programId: 2, id: 5 }
-Customer created:  { Name: 'Monica', programId: 2, id: 6 }
+...
 Web server listening at: http://0.0.0.0:3000
 Browse your REST API at http://0.0.0.0:3000/explorer
-CreditCard created:  { AccountNumber: 4,
-  Points: 20000,
-  AccountType: 'Platinum',
-  customerId: 3,
-  id: 3 }
-CreditCard created:  { AccountNumber: 3,
-  Points: 10000,
-  AccountType: 'Platinum',
-  customerId: 4,
-  id: 4 }
-CreditCard created:  { AccountNumber: 1,
-  Points: 1500,
-  AccountType: 'Gold',
-  customerId: 5,
-  id: 5 }
-CreditCard created:  { AccountNumber: 5,
-  Points: 10000,
-  AccountType: 'Platnium',
-  customerId: 6,
-  id: 6 }
+...
 ```                             
 
 ### Explore APIs and Test Application
@@ -203,6 +147,18 @@ You should see the amount of credit card rewards points remaining in the program
         curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/closeAccount" 
 
 ## Part B: Do-it-yourself: Create the Rewards application
+
+For the steps to create your own Rewards application, please follow this link to [RewardsApplication.md](https://github.com/ibmruntimes/loopback-demo-zos/edit/master/RewardsApplication.md).
+
+This scenario guides you through the steps to create the 4 APIs for the TorCC credit card to use and the backend application. By the end of the session, you will know how to create and deploy the APIs.
+
+1. [Project Setup](#project-setup)
+2. [Linking a Datasource](#linking-a-datasource)
+3. [Generating Model Objects](#generating-model-objects)
+4. [Generating Relationships Between Models](#generating-relationships-between-models)
+5. [Application Initialization](#application-initialization)
+6. [Adding Application Logic](#adding-application-logic)
+7. [Explore APIs and Test the Application](#explore-apis-and-test-the-application)
 
 ### Project setup
 
