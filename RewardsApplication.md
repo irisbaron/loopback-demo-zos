@@ -268,8 +268,7 @@ For the application logic, you can write your own code for those methods. Altern
 
 ### Explore APIs and Test the Application
 
-Now that we have backend logic we can test the application itself. 
-
+Now that we have the backend logic in place, we can run the application and test it.
 From the project directory at the root folder type:
 
 ```bash
@@ -277,5 +276,4 @@ npm install
 node .
 ```
 
-
-See [Explore APIs and Test Application](#explore-apis-and-test-application) in Part A.
+For testing the application, see [Explore APIs and Test Application](https://github.com/ibmruntimes/loopback-demo-zos/blob/master/README.md#explore-apis-and-test-application) in Part A. 
