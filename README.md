@@ -98,7 +98,7 @@ Alternatively, download the developer journey code as a zip file from [here](htt
 
 This part guides you through the steps to run the application and explore the APIs and test the application. By the end of the session you will understand the APIs and be able to explore and test the APIs created.
   
-### Run the Application
+#### Run the Application
 
 In the developer journey code directory, install the node module dependencies with `npm`, and run the application.
 
@@ -115,7 +115,7 @@ Web server listening at: http://0.0.0.0:3000
 Browse your REST API at http://0.0.0.0:3000/explorer
 ```                             
 
-### Explore APIs and Test Application
+#### Explore APIs and Test Application
 
 The application launches a http server listening on the default port 3000. You can explore your REST APIs created at [http://localhost:3000/explorer](http://localhost:3000/explorer). This URL lists all the APIs exposed by the application and available for use.  In the explorer, you can expand the APIs by selecting `List Operations` to see its details and also test them.
 
@@ -144,6 +144,6 @@ You should see the amount of credit card rewards points remaining in the program
 
         curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/closeAccount" 
 
-## Part B: Do-it-yourself: Create the Rewards Application
+### Part B: Do-it-yourself: Create the Rewards Application
 
 For the steps to create your own Rewards application, please follow this link to [RewardsApplication.md](https://github.com/ibmruntimes/loopback-demo-zos/blob/master/RewardsApplication.md).
