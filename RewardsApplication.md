@@ -243,7 +243,7 @@ For the other options, enter the same responses as in the above Customer - Credi
 
 The LoopBack provides a mechanism to initialize the application known as bootstrapping. When the application starts the LoopBack bootstrapper, it will configure the datasources, models and application settings. In addition, it runs the boot scripts under the `/server/boot` directory. This allows to preload code and initialize data for the application during startup. For more information [Defining boot scripts (LoopBack documentation)](https://loopback.io/doc/en/lb2/Defining-boot-scripts).
 
-For our Rewards application, we initialize some data to be used for testing. For simplicity, clone the example in another directory.
+For our Rewards application, we initialize some data to be used for testing. For simplicity, clone the example in another directory if you have done that already.
 
 ```bash
 git clone https://github.com/ibmruntimes/loopback-demo-zos
