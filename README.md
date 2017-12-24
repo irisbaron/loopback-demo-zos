@@ -96,7 +96,7 @@ Alternatively, download the developer journey code as a zip file from [here](htt
 
 ### Part A: Deploy the Rewards Application
 
-This part guides you through the steps to deploy the rewards program application. You will first clone the repository, run the application and then explore the APIs and test the application. By the end of the session you will understand the APIs and be able to explore and test the APIs created.
+This part guides you through the steps to run the application and explore the APIs and test the application. By the end of the session you will understand the APIs and be able to explore and test the APIs created.
   
 ### Run the Application
 
@@ -111,10 +111,8 @@ node .
 The output shows the customers, credit cards and rewards program created. It will also include the following lines: 
 
 ```javascript
-...
 Web server listening at: http://0.0.0.0:3000
 Browse your REST API at http://0.0.0.0:3000/explorer
-...
 ```                             
 
 ### Explore APIs and Test Application
