@@ -71,7 +71,9 @@ In our scenario, the TorCC credit card company holds data regarding the members,
 3. delete/close a program
 4. claim points
 
-These APIs cover the full spectrum of create, retrieve, update and delete (CRUD) functions
+These APIs cover the full spectrum of create, retrieve, update and delete (CRUD) functions.
+
+![FlowArchitectureDiagram](./media/Models.png?raw=true)
 
 While this developer journey targets z/OS users, you can create and run the application on any platform, in particular as our example data resides in memory, and is not tied to the platform. In practice z/OS customers probably have their data reside in DB2 or other asset on z/OS and thus will benefit from deploying the backend application on z/OS and collocating the application and the data.
 
