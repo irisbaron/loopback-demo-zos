@@ -1,9 +1,10 @@
+[![Build Status](https://travis-ci.org/IBM/loopback-demo-zos.svg?branch=master)](https://travis-ci.org/IBM/loopback-demo-zos)
 
 # Node.js on z/OS Sample Application
 
 ## Create Rewards Program APIs and deploy on z/OS
 
-In this developer journey we will build a Node.js backend application on z/OS. The application accesses information that resides on z/OS and provides an API that can later be consumed by frontend applications and services. This developer journey will highlight the benefits of hosting the Node.js application on z/OS and will provide an introduction to Node.js development for traditional z/OS developers.
+In this code pattern we will build a Node.js backend application on z/OS. The application accesses information that resides on z/OS and provides an API that can later be consumed by frontend applications and services. This developer journey will highlight the benefits of hosting the Node.js application on z/OS and will provide an introduction to Node.js development for traditional z/OS developers.
 
 Node.js is a very popular platform for developing scalable enterprise API tier. Built upon the JavaScript programming language, Node.js enables millions of developers to build and collaborate across frontend and backend aspects of an application. Furthermore, the Node.js community has and continue to develop a plethora of frameworks and modules to enable rich web applications.  In this developer journey, we will focus on one such open-source framework - LoopBack.  LoopBack is a highly-extensible, open-source framework, that allows you to create end-to-end REST APIs with minimum coding effort. It allows for agile development and quick iterations for expanding and growing an enterprise solution. As Node.js is platform neutral, the development can be done on any platform independent on the deployment. Node.js on z/OS is now a first-class enterprise offering, making it ideal for hosting backend applications which require access to z/OS assets while providing performance, scalability and security. In this developer journey we showcase the business challenges that a typical customer on IBM Z might experience. We share a case study about a fictitious _TorCC_ credit card company, and how they leverage the capabilities of the z/OS system.
 
@@ -13,7 +14,13 @@ The objective of this application is to enable a highly scalable set of APIs tha
 
 In addition, having the backend application on the same system as the data will also reduce cost of power, footprint, cooling, and decrease system complexity and management efforts, compared to a solution on a remote or distributed system.
 
-## Flow / Architecture
+When the reader has completed this pattern, they will understand how to:
+
+* Install node.js on z/OS
+* Implement and deploy a node.js application using Loopback for API access
+
+
+## Flow
 
 The backend server communicates with data assets on the z/OS system and generates 4 APIs to query and manage the reward program.
 
@@ -29,6 +36,10 @@ The backend server communicates with data assets on the z/OS system and generate
 - [Node.js](https://nodejs.org/en/) - An asynchronous event driven JavaScript runtime, designed to build scalable applications
 - [LoopBack](https://loopback.io/) - A popular open-source Node.js framework for creating APIs
 - [npm](https://www.npmjs.com/) - package manager for the JavaScript programming language included with Node.js installation
+
+# Watch the Video
+
+[![](http://img.youtube.com/vi/hTj0kbkmnTk/0.jpg)](https://www.youtube.com/watch?v=hTj0kbxmnTk)
 
 ## System Requirements
 
@@ -75,34 +86,34 @@ These APIs cover the full spectrum of create, retrieve, update and delete (CRUD)
 
 ![FlowArchitectureDiagram](./media/Models.png?raw=true)
 
-While this developer journey targets z/OS users, you can create and run the application on any platform, in particular as our example data resides in memory, and is not tied to the platform. In practice z/OS customers probably have their data reside in DB2 or other asset on z/OS and thus will benefit from deploying the backend application on z/OS and collocating the application and the data.
+While this code pattern targets z/OS users, you can create and run the application on any platform, in particular as our example data resides in memory, and is not tied to the platform. In practice z/OS customers probably have their data reside in DB2 or other asset on z/OS and thus will benefit from deploying the backend application on z/OS and collocating the application and the data.
 
 The first part provides basic steps to run the application as is and get familiarized with the APIs. Deploying it on a z/OS system would demonstrate that Node.js on z/OS is a first class citizen and it behaves similarly to any other platforms. By the end of this part, you will have setup your environment and know how to run a Node.js application and how to explore its APIs.
 
 The second part guides you through the steps to recreate our rewards application. It provides basic information about LoopBack concepts such as datasources, models and relations. By the end of this part you should have the knowledge to create your own simple LoopBack application.
 
 
-## Steps ##
+# Steps
 To experience with the rewards application, ether by running it or creating it yourself, you first need to clone the repository locally. 
 
 ```bash
-git clone https://github.com/ibmruntimes/loopback-demo-zos
+git clone https://github.com/IBM/loopback-demo-zos
 ```
 On z/OS run the following:
 
 ```bash
-git clone git://github.com/ibmruntimes/loopback-demo-zos
+git clone git://github.com/IBM/loopback-demo-zos
 ```
 
 Alternatively, download the developer journey code as a zip file from [here](https://github.com/ibmruntimes/loopback-demo-zos/archive/master.zip). On z/OS, use 'unzip -a' to unzip
 
-### Part A: Deploy the Rewards Application
+## Part A: Deploy the Rewards Application
 
 This part guides you through the steps to run the application and explore the APIs and test the application. By the end of the session you will understand the APIs and be able to explore and test the APIs created.
   
-#### Run the Application
+### Run the Application
 
-In the developer journey code directory, install the node module dependencies with `npm`, and run the application.
+In the code pattern directory, install the node module dependencies with `npm`, and run the application.
 
 ```bash
 cd loopback-demo-zos
@@ -117,7 +128,7 @@ Web server listening at: http://0.0.0.0:3000
 Browse your REST API at http://0.0.0.0:3000/explorer
 ```                             
 
-#### Explore APIs and Test Application
+### Explore APIs and Test Application
 
 The application launches a http server listening on the default port 3000. You can explore your REST APIs created at [http://localhost:3000/explorer](http://localhost:3000/explorer). This URL lists all the APIs exposed by the application and available for use.  In the explorer, you can expand the APIs by selecting `List Operations` to see its details and also test them.
 
@@ -146,6 +157,13 @@ You should see the amount of credit card rewards points remaining in the program
 
         curl -X DELETE -d "Members[]=Ross&&Members[]=Rachel" "http://localhost:3000/api/Rewards/closeAccount" 
 
-### Part B: Do-it-yourself: Create the Rewards Application
+## Part B: Do-it-yourself: Create the Rewards Application
 
 For the steps to create your own Rewards application, please follow this link to [RewardsApplication.md](https://github.com/ibmruntimes/loopback-demo-zos/blob/master/RewardsApplication.md).
+
+# Links
+
+* [IBM SDK for Node.js – z/OS trial](https://developer.ibm.com/node/sdk/ztp/)
+
+# License
+[Apache 2.0](LICENSE)
