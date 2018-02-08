@@ -4,9 +4,9 @@
 
 ## Create Rewards Program APIs and deploy on z/OS
 
-In this code pattern we will build a Node.js backend application on z/OS. The application accesses information that resides on z/OS and provides an API that can later be consumed by frontend applications and services. This developer journey will highlight the benefits of hosting the Node.js application on z/OS and will provide an introduction to Node.js development for traditional z/OS developers.
+In this code pattern we will build a Node.js backend application on z/OS. The application accesses information that resides on z/OS and provides an API that can later be consumed by frontend applications and services. This code pattern will highlight the benefits of hosting the Node.js application on z/OS and will provide an introduction to Node.js development for traditional z/OS developers.
 
-Node.js is a very popular platform for developing scalable enterprise API tier. Built upon the JavaScript programming language, Node.js enables millions of developers to build and collaborate across frontend and backend aspects of an application. Furthermore, the Node.js community has and continue to develop a plethora of frameworks and modules to enable rich web applications.  In this developer journey, we will focus on one such open-source framework - LoopBack.  LoopBack is a highly-extensible, open-source framework, that allows you to create end-to-end REST APIs with minimum coding effort. It allows for agile development and quick iterations for expanding and growing an enterprise solution. As Node.js is platform neutral, the development can be done on any platform independent on the deployment. Node.js on z/OS is now a first-class enterprise offering, making it ideal for hosting backend applications which require access to z/OS assets while providing performance, scalability and security. In this developer journey we showcase the business challenges that a typical customer on IBM Z might experience. We share a case study about a fictitious _TorCC_ credit card company, and how they leverage the capabilities of the z/OS system.
+Node.js is a very popular platform for developing scalable enterprise API tier. Built upon the JavaScript programming language, Node.js enables millions of developers to build and collaborate across frontend and backend aspects of an application. Furthermore, the Node.js community has and continue to develop a plethora of frameworks and modules to enable rich web applications.  In this developer journey, we will focus on one such open-source framework - LoopBack.  LoopBack is a highly-extensible, open-source framework, that allows you to create end-to-end REST APIs with minimum coding effort. It allows for agile development and quick iterations for expanding and growing an enterprise solution. As Node.js is platform neutral, the development can be done on any platform independent on the deployment. Node.js on z/OS is now a first-class enterprise offering, making it ideal for hosting backend applications which require access to z/OS assets while providing performance, scalability and security. In this code pattern we showcase the business challenges that a typical customer on IBM Z might experience. We share a case study about a fictitious _TorCC_ credit card company, and how they leverage the capabilities of the z/OS system.
 
 The TorCC credit card company provides a complex reward system as incentive program for its customers. It allows members to share their reward points. The company wishes to create a backend application that provides an API to query the status of the reward program, based on the member name or set of names. The resulting API can then be used by web or mobile applications (the frontend). It can also be used by other frontend applications, for example, to create internal reports or use analytics to provide recommendations to the members.
 
@@ -31,11 +31,14 @@ The backend server communicates with data assets on the z/OS system and generate
 3. Expose the rewards program APIs. The credit card and customer info remains secure in the z/OS.
 4. Explore, test and consume the APIs created.
 
-## Featured Technologies
+## Included components
 
-- [Node.js](https://nodejs.org/en/) - An asynchronous event driven JavaScript runtime, designed to build scalable applications
-- [LoopBack](https://loopback.io/) - A popular open-source Node.js framework for creating APIs
-- [npm](https://www.npmjs.com/) - package manager for the JavaScript programming language included with Node.js installation
+* LoopBack(http://loopback.io/): A highly extensible, open source Node.js framework.
+
+## Featured technologies
+
+* [Node.js](https://nodejs.org/): An open-source JavaScript run-time environment for executing server-side JavaScript code.
+* [Systems](https://www.ibm.com/it-infrastructure/us-en/): Systems have to be flexible to support new types of applications and solutions.
 
 # Watch the Video
 
@@ -106,7 +109,7 @@ On z/OS run the following:
 git clone git://github.com/IBM/loopback-demo-zos
 ```
 
-Alternatively, download the developer journey code as a zip file from [here](https://github.com/ibmruntimes/loopback-demo-zos/archive/master.zip). On z/OS, use 'unzip -a' to unzip
+Alternatively, download the code pattern as a zip file from [here](https://github.com/ibm/loopback-demo-zos/archive/master.zip). On z/OS, use 'unzip -a' to unzip
 
 ## Part A: Deploy the Rewards Application
 
@@ -165,6 +168,10 @@ For the steps to create your own Rewards application, please follow this link to
 # Links
 
 * [IBM SDK for Node.js – z/OS trial](https://developer.ibm.com/node/sdk/ztp/)
+* [IBM SDK for Node.js - z/OS Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSTRRS_6.0.0/welcome.html): Overview, installation instructions, and troubleshooting tips for the IBM SDK for Node.js - z/OS
+* [IBM SDK for Node.js community](https://www.ibm.com/developerworks/community/groups/community/node): Forums and discussion around the IBM SDK for Node.js
+* [Reasons to Host your Node.js Applications on z/OS](https://developer.ibm.com/mainframe/2018/01/19/reasons-host-node-js-applications-zos/): A blog detailing the benifits of using z/OS
+* [z/OS Offers Co-Location and Technology Advantages](http://bit.ly/2x7ODPx): An IBM Systems Magazine article with a technology overview
 
 # License
 [Apache 2.0](LICENSE)
