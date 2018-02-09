@@ -41,7 +41,7 @@ The backend server communicates with data assets on the z/OS system and generate
 
 # Watch the Video
 
-[![](http://img.youtube.com/vi/hTj0kbkmnTk/0.jpg)](https://www.youtube.com/watch?v=hTj0kbxmnTk)
+[![](http://img.youtube.com/vi/hTj0kbxmnTk/0.jpg)](https://www.youtube.com/watch?v=hTj0kbxmnTk)
 
 ## System Requirements
 
