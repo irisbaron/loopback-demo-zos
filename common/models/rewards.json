@@ -1,5 +1,5 @@
 {
-  "name": "Reward",
+  "name": "Rewards",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
