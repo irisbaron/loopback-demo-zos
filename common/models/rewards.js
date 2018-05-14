@@ -140,7 +140,7 @@ module.exports = function (Rewards) {
             var response = {};
             response.Status = "Failed";
             response.Reason = "No such program";
-            cb(null, 0)
+            cb(null, response)
             return
          }
          var memberIds = Rewards.flattenRecords(queryResults, Customers.getId)
