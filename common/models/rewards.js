@@ -34,8 +34,12 @@ module.exports = function (Rewards) {
            return id === referenceId
          })
          if (referenceId === null || referenceId === undefined ||
-               memberSet.length === 0) {
-           cb(null, 0)
+               memberSet.length != (Members.length-1)){
+           var response = {}; 
+           response.Status = "Failed";
+           response.Reason = "No such program";
+           cb(null, response)
+           return
          }
          var memberIds = Rewards.flattenRecords(queryResults, Customers.getId)
          Rewards.sendQuery(memberIds, CreditCards.getCards)
@@ -65,16 +69,15 @@ module.exports = function (Rewards) {
     Rewards.sendQuery(Members, Customers.getMember)
        .then(function (queryResults) {
          var rewardPgmIds = Rewards.flattenRecords(queryResults, Customers.getPgmId)
-         var referenceId = rewardPgmIds.pop()
          var memberSet = rewardPgmIds.filter(id => {
-           return id === referenceId
+           return id === null
          })
-         if (referenceId != undefined || referenceId != null ||
-               memberSet.length === 0) {
+         if (rewardPgmIds.length != Members.length || memberSet.length != Members.length) {
            var response = {}
            response.Status = 'Rejected'
-           response.Reason = 'Member/Members are allready registered to another account'
+           response.Reason = 'Member/Members are not customers or are allready registered to another account'
            cb(null, response)
+           return
          } else {
            Rewards.create(function (error, instance) {
              if (error) console.log('Error occured in Reward account creation' + error)
@@ -119,8 +122,12 @@ module.exports = function (Rewards) {
            return id === referenceId
          })
          if (referenceId === null || referenceId === undefined ||
-               memberSet.length === 0) {
-           cb(null, 0)
+            memberSet.length != (Members.length-1)){
+            var response = {};
+            response.Status = "Failed";
+            response.Reason = "No such program";
+            cb(null, 0)
+            return
          }
          var memberIds = Rewards.flattenRecords(queryResults, Customers.getId)
          Rewards.sendQuery(memberIds, CreditCards.getCards)
@@ -137,7 +144,7 @@ module.exports = function (Rewards) {
                  return
                }
              }
-                   // Update customer credit card points total
+             // Update customer credit card points total
              cardIndex = 0
              var remainingPoints = 0
              queryResults.forEach(function (query) {
@@ -175,11 +182,14 @@ module.exports = function (Rewards) {
          var memberSet = rewardPgmIds.filter(id => {
            return id === referenceId
          })
+       
+        
          if (referenceId === undefined || referenceId === null ||
-               memberSet.length === 0) {
+               memberSet.length != (Members.length-1)){
            var response = {}
            response = 'Failed! Members are not registered in the same account'
            cb(null, response)
+           return
          } else {
            queryResults.forEach(function (result) {
              result.forEach(function (customer) {
@@ -199,6 +209,7 @@ module.exports = function (Rewards) {
   }
 
   Rewards.remoteMethod('createAccount', {
+    description: 'Create a Rewards Program Account.',
     accepts: [
               {arg: 'Members', type: 'array'}
     ],
@@ -207,6 +218,7 @@ module.exports = function (Rewards) {
   })
 
   Rewards.remoteMethod('getPoints', {
+    description: 'Get Points from a Rewards Program Account.',
     accepts: [
               {arg: 'Members', type: 'array'}
     ],
@@ -215,6 +227,7 @@ module.exports = function (Rewards) {
   })
 
   Rewards.remoteMethod('claimPoints', {
+    description: 'Claim Points from a Rewards Program Account.',
     accepts: [
               {arg: 'claimedPoints', type: 'array'}
     ],
@@ -226,6 +239,7 @@ module.exports = function (Rewards) {
   })
 
   Rewards.remoteMethod('closeAccount', {
+    description: 'Close a Rewards Program Account.',
     accepts: [
               {arg: 'Members', type: 'array'}
     ],
