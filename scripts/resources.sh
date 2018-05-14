@@ -1,3 +1,4 @@
+# Copyright 2018, IBM Corp. 
 #!/bin/bash
 
 # This script contains functions used by many of the scripts found in scripts/

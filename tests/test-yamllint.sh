@@ -1,3 +1,4 @@
+# Copyright 2018, IBM Corp. 
 #!/bin/bash -e
 
 # shellcheck disable=SC1090
