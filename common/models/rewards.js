@@ -201,7 +201,7 @@ module.exports = function (Rewards) {
          if (referenceId === undefined || referenceId === null ||
                memberSet.length != (Members.length-1)){
            var response = {}
-           response = 'Failed! Members are not registered in the same account'
+           response = 'Failed! Members are not customers or not registered to an account'
            cb(null, response)
            return
          } else {
