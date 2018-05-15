@@ -47,8 +47,15 @@ module.exports = function (Rewards) {
          var memberSet = rewardPgmIds.filter(id => {
            return id === referenceId
          })
+        if (Members.length != 2){
+             var response = {};
+             response.Status = "Failed";
+             response.Reason = "Expecting 2 members for the reward program";
+             cb(null, response)
+             return
+        }
          if (referenceId === null || referenceId === undefined ||
-               memberSet.length != (Members.length-1)){
+               memberSet.length === 0){
            var response = {}; 
            response.Status = "Failed";
            response.Reason = "No such program";
@@ -86,7 +93,15 @@ module.exports = function (Rewards) {
          var memberSet = rewardPgmIds.filter(id => {
            return id === null
          })
-         if (rewardPgmIds.length != Members.length || memberSet.length != Members.length) {
+         if (Members.length != 2){
+             var response = {};
+             response.Status = "Failed";
+             response.Reason = "Expecting 2 members for the reward program";
+             cb(null, response)
+             return
+             }
+        //Accepting 2 members with ProgramId set to null.
+         if (memberSet.length != Members.length) {
            var response = {}
            response.Status = 'Rejected'
            response.Reason = 'Member/Members are not customers or are allready registered to another account'
@@ -128,6 +143,8 @@ module.exports = function (Rewards) {
     var pointsToDeduct = claimedPoints.map(function (claim) {
       return claim.Points
     })
+      
+      
     Rewards.sendQuery(Members, Customers.getMember)
        .then(function (queryResults) {
          var rewardPgmIds = Rewards.flattenRecords(queryResults, Customers.getPgmId)
@@ -135,8 +152,17 @@ module.exports = function (Rewards) {
          var memberSet = rewardPgmIds.filter(id => {
            return id === referenceId
          })
+         
+         if (Members.length != 2){
+             var response = {};
+             response.Status = "Failed";
+             response.Reason = "Expecting 2 members for the reward program";
+             cb(null, response)
+             return
+             }
+             
          if (referenceId === null || referenceId === undefined ||
-            memberSet.length != (Members.length-1)){
+            memberSet.length === 0){
             var response = {};
             response.Status = "Failed";
             response.Reason = "No such program";
@@ -197,9 +223,16 @@ module.exports = function (Rewards) {
            return id === referenceId
          })
        
+        if (Members.length != 2){
+             var response = {};
+             response.Status = "Failed";
+             response.Reason = "Expecting 2 members for the reward program";
+             cb(null, response)
+             return
+        }
         
          if (referenceId === undefined || referenceId === null ||
-               memberSet.length != (Members.length-1)){
+             memberSet.length === 0){
            var response = {}
            response = 'Failed! Members are not customers or not registered to an account'
            cb(null, response)
